@@ -1,1 +1,4 @@
-
+Format: firstL -- TIMESTAMP -- changes and/or additions
+---------------------------------------------------------------------------------------------------------------------
+juliaN -- 2022-05-25 8:41 -- work on design doc
+juliaN -- 2022-05-25 21:28 -- game mechanics added to design doc, devlog added
