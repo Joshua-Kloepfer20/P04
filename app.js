@@ -6,7 +6,6 @@ const io = new Server({
     }
 });
 // test data - will change later
-// consider using socket id as keys instead (and having username as a value)
 var data = {
   "X": [250, 250, 10],
   "Y": [100, 100, 5],
@@ -16,6 +15,9 @@ io.on("connection", (socket) => {
   io.emit("updateFromServer", data) // send to all connected clients
   // socket.emit("updateFromServer") // only send to the client who connected
   // consider get size and get position methods
+  socket.on("getData", (arg) => {
+    io.emit("returnData", data[arg])
+  })
   socket.on("updateFromClient", (args) => { // listen from a specific socket
     console.log("got it")
     user = null

@@ -2,12 +2,8 @@ const socket = io("ws://localhost:3000")
 
 var c = document.getElementById("playground");
 var ctx = c.getContext("2d");
-var myUsername = "X"; // GET FROM LOGIN, also fix later (this needs to be protected)
-// fix this later (these also need to be protected)
-// get data from server each time instead of storing these client-side
-var myPositionX = null;
-var myPositionY = null;
-var mySize = null;
+const myUsername = "X"; // immutable
+
 var drawDot = (data) => {
   ctx.clearRect(0,0,500,500);
   for(i in data) {
@@ -18,18 +14,20 @@ var drawDot = (data) => {
   }
 };
 var move = () => {
-  myPositionX += 100
-  sendUpdate() // add parameters
+  socket.emit("getData", myUsername)
+  socket.on("returnData", (args) => {
+    // movement code
+    args[0] += 100
+    // update the position
+    sendUpdate(args[0], args[1], args[2])
+  })
 }
 
-var sendUpdate = () => {
+var sendUpdate = (myPositionX, myPositionY, mySize) => {
   console.log("send")
   socket.emit("updateFromClient", [myUsername, myPositionX, myPositionY, mySize])
 }
 socket.on("updateFromServer", (args) => {
-  myPositionX = args[myUsername][0]
-  myPositionY = args[myUsername][1]
-  mySize = args[myUsername][2]
   drawDot(args)
 });
 
