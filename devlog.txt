@@ -7,4 +7,5 @@ juliaN -- 2022-05-26 21:39 -- more game mechanics and target ship date added to 
 juliaN -- 2022-05-27 8:09 -- second database added to DD to keep track of map
 danielS -- 2022-05-27 8:20 -- Add socket.io requirement
 michaelB -- 2022-05-29 18:54 -- begin implementing client-server data sending
+michaelB -- 2022-05-30 16:15 -- remove client-side attributes
 
