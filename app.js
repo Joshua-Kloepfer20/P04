@@ -1,11 +1,40 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const { Server } = require("socket.io");
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+const io = new Server({ 
+    cors: {
+        origin: "*"
+    }
+});
+// test data - will change later
+var data = {
+  "X": [250, 250, 10],
+  "Y": [100, 100, 5],
+  "Z": [400, 300, 20]
+}
+io.on("connection", (socket) => {
+  io.emit("updateFromServer", data) // send to all connected clients
+  // socket.emit("updateFromServer") // only send to the client who connected
+  // consider get size and get position methods
+  socket.on("getData", (arg) => {
+    io.emit("returnData", data[arg])
+  })
+  socket.on("updateFromClient", (args) => { // listen from a specific socket
+    console.log("got it")
+    user = null
+    userdata = []
+    for(var i = 0; i < args.length; i++) {
+      if(i == 0){
+        user = args[i]
+      } else{
+        userdata.push(args[i])
+      }
+    }
+    data[user] = userdata
+    console.log(data)
+    io.emit("updateFromServer", data)
+  });
+});
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+
+
+io.listen(3000);
