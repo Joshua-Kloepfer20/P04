@@ -18,6 +18,6 @@
   "homepage": "https://github.com/Joshua-Kloepfer20/P04#readme",
   "dependencies": {
     "express": "^4.18.1",
-    "sqlite3": "^5.0.8"
+    "socket.io": "^4.5.1"
   }
 }

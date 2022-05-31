@@ -4,4 +4,6 @@ juliaN -- 2022-05-25 8:41 -- work on design doc
 juliaN -- 2022-05-25 21:28 -- game mechanics added to design doc, devlog added
 juliaN -- 2022-05-26 21:39 -- more game mechanics and target ship date added to design doc
 juliaN -- 2022-05-27 8:09 -- second database added to DD to keep track of map
+danielS -- 2022-05-27 8:20 -- Add socket.io requirement
 juliaN -- 2022-05-27 8:36 -- sqlite3 database created with node.js
+danielS -- 2022-05-25 8:37 -- Add basic file structure. Add basic stylings.
