@@ -3,7 +3,6 @@
 ## Description
 A game that mimics Agar.io, an endless game about growing bigger by eating other players.  Players will be able to play on a multiplayer server with other players and eat their friends. They will also be able to login to save their highscores to a global leaderboard.
 
-
 ## Roles
 * Lia - game mechanics (JS), backend
 js
