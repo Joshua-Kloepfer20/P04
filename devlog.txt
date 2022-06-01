@@ -12,3 +12,4 @@ michaelB -- 2022-05-29 18:54 -- begin implementing client-server data sending
 michaelB -- 2022-05-30 16:15 -- remove client-side attributes
 juliaN -- 2022-05-31 8:37 -- arrow key interactivity added
 juliaN -- 2022-06-01 8:17 -- description and roles added to README
+juliaN -- 2022-06-01 8:39 -- work on movement of user
