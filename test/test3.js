@@ -4,41 +4,14 @@ document.onkeyup = function(){arrowChange(false)};
 
   function arrowChange(isDown) {
   // Create scheduler for each and have up key cancel
-      switch (event.keyCode) {
-         case 37:
-            console.log("Left key.");
+  var key = event.keyCode;
+      switch (key) {
+         case 37: case 38: case 39: case 40:
             if (isDown) {
-              startMove("Test", "L");
+              startMove("Test", key);
             }
             else {
-              stopMove("Test", "L");
-            }
-            break;
-         case 38:
-            console.log("Up key.");
-            if (isDown) {
-              startMove("Test", "U");
-            }
-            else {
-              stopMove("Test", "U");
-            }
-            break;
-         case 39:
-            console.log("Right key.");
-            if (isDown) {
-              startMove("Test", "R");
-            }
-            else {
-              stopMove("Test", "R");
-            }
-            break;
-         case 40:
-            console.log("Down key.");
-            if (isDown) {
-              startMove("Test", "D");
-            }
-            else {
-              stopMove("Test", "D");
+              stopMove("Test", key);
             }
             break;
       }
@@ -67,7 +40,7 @@ document.onkeyup = function(){arrowChange(false)};
 
    function changeTimer(user, key, isStart) {
      switch (key) {
-        case "L":
+        case 37:
            if (isStart) {
              console.log("starting" + user + key);
              timerL = clearInterval(timerL);
@@ -78,7 +51,7 @@ document.onkeyup = function(){arrowChange(false)};
              timerL = clearInterval(timerL);
            }
            break;
-        case "U":
+        case 38:
            if (isStart) {
              timerU = clearInterval(timerU);
              console.log("starting" + user + key);
@@ -89,7 +62,7 @@ document.onkeyup = function(){arrowChange(false)};
              timerU = clearInterval(timerU);
            }
            break;
-        case "R":
+        case 39:
         if (isStart) {
           timerR = clearInterval(timerR);
           console.log("starting" + user + key);
@@ -100,7 +73,7 @@ document.onkeyup = function(){arrowChange(false)};
           timerR = clearInterval(timerR);
         }
            break;
-        case "D":
+        case 40:
         if (isStart) {
           timerD = clearInterval(timerD);
           console.log("starting" + user + key);
