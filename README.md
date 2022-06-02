@@ -59,6 +59,14 @@ $ git clone git@github.com:Joshua-Kloepfer20/P04.git
 (<venv_name>)$ python __init__.py
 ```
 ### Run Node.js Backend Server
+#### Install Dependencies
+
+```
+cd <path_to_P04>
+npm install
+```
+#### Run the Server
+
 ```
 $ cd <path_to_P04>
 $ node app.js
@@ -66,7 +74,7 @@ $ node app.js
 ### Launch Site
 
 Go to http://127.0.0.1:5000/ in your browser, since this is where the Flask server is running.
-The Node.js server runs on http://127.0.0.1:3000/, but a client will never need to access it directly.
+The Node.js server runs on http://127.0.0.1:3000/, but a user will never need to access it directly.
 
 ## Launch Codes - Don't Run Locally
 
