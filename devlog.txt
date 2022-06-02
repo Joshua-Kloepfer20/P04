@@ -15,3 +15,4 @@ juliaN -- 2022-06-01 8:17 -- description and roles added to README
 juliaN -- 2022-06-01 8:39 -- work on movement of user
 michaelB -- 2022-06-01 22:29 -- update README with launch codes, refactor repository
 michaelB -- 2022-06-01 22:45 -- update design doc with updated component map and description of deployment, add requirements.txt
+juliaN -- 2022-06-02 8:41 -- arrow keys pressed down keep signaling movement, stop sometimes fails
