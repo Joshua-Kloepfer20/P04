@@ -13,13 +13,18 @@ var drawDot = (data) => {
     ctx.fill();
   }
 };
-var move = () => {
+var move = (e) => {
   socket.emit("getData", myUsername)
-  socket.on("returnData", (args) => {
-    // movement code
-    args[0] += 100
-    // update the position
-    sendUpdate(args[0], args[1], args[2])
+  ran = false
+  socket.on("giveBackData", (args) => { // this runs multiple times for some reason
+    if(!ran) { // make it not run multiple times
+      console.log("data returned")
+      args[0] += 100
+      console.log(args)
+      // update the position
+      sendUpdate(args[0], args[1], args[2])
+      ran = true
+    }
   })
 }
 

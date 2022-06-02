@@ -11,13 +11,18 @@ var data = {
   "Y": [100, 100, 5],
   "Z": [400, 300, 20]
 }
+var drawDot = () => {
+  console.log("data send")
+};
 io.on("connection", (socket) => {
   io.emit("updateFromServer", data) // send to all connected clients
   // socket.emit("updateFromServer") // only send to the client who connected
-  // consider get size and get position methods
+
   socket.on("getData", (arg) => {
-    io.emit("returnData", data[arg])
+    console.log("west virginia")
+    socket.emit("giveBackData", data[arg])
   })
+  
   socket.on("updateFromClient", (args) => { // listen from a specific socket
     console.log("got it")
     user = null

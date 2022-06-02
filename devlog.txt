@@ -1,12 +1,17 @@
 Format: firstL -- TIMESTAMP -- changes and/or additions
 ---------------------------------------------------------------------------------------------------------------------
-danielS -- 2022-05-25 8:37 -- Add basic file structure. Add basic stylings.
+danielS -- 2022-05-25 8:37 -- add basic file structure. Add basic stylings.
 juliaN -- 2022-05-25 8:41 -- work on design doc
 juliaN -- 2022-05-25 21:28 -- game mechanics added to design doc, devlog added
 juliaN -- 2022-05-26 21:39 -- more game mechanics and target ship date added to design doc
 juliaN -- 2022-05-27 8:09 -- second database added to DD to keep track of map
-danielS -- 2022-05-27 8:20 -- Add socket.io requirement
+danielS -- 2022-05-27 8:20 -- add socket.io requirement
 juliaN -- 2022-05-27 8:36 -- sqlite3 database created with node.js
-danielS -- 2022-05-25 8:37 -- Add basic file structure. Add basic stylings.
+danielS -- 2022-05-25 8:37 -- add basic file structure. Add basic stylings.
 michaelB -- 2022-05-29 18:54 -- begin implementing client-server data sending
 michaelB -- 2022-05-30 16:15 -- remove client-side attributes
+juliaN -- 2022-05-31 8:37 -- arrow key interactivity added
+juliaN -- 2022-06-01 8:17 -- description and roles added to README
+juliaN -- 2022-06-01 8:39 -- work on movement of user
+michaelB -- 2022-06-01 22:29 -- update README with launch codes, refactor repository
+michaelB -- 2022-06-01 22:45 -- update design doc with updated component map and description of deployment, add requirements.txt
