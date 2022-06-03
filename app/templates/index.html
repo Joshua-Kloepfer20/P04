@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<title>P04</title>
-<head>
-    
-</head>
-<body>
-    Hello, World
-    <canvas width="500" height="500" id="playground"></canvas>
-    <script src="/static/js/socket.io.js"></script>
-    <script src="/static/js/test.js"></script>
+{% extends "base.html" %}
+{% block title %}Untitled Circle Game{% endblock %}
+
+{% block content %}
+    <canvas width="500" height="500" id="game"></canvas>
     <a href="login">login</a>
     <a href="logout">logout</a>
-    
-</body>
+    <script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/setup.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/draw.js') }}"></script>    
+    <script src="{{ url_for('static', filename='js/client.js') }}"></script>
+{% endblock %}

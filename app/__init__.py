@@ -1,11 +1,16 @@
-# Clyde 'Thluffy' Sinclair
-# SoftDev
-# Oct 2021
-
 from flask import Flask, render_template, session, request, redirect
 from os import urandom
 import sqlite3
-app = Flask(__name__)
+
+def create_app():
+    app = Flask(__name__, static_url_path='', static_folder='static')
+    # Configure app key & DB location
+    app.config.from_mapping(
+        SECRET_KEY = urandom(32),
+    )
+    return app
+
+app = create_app()
 
 app.secret_key = urandom(32)
 
@@ -17,8 +22,10 @@ def test_tmplt():
     db.commit()
     db.close()
     return render_template( 'index.html')
+
 def islogged():
     return 'username' in session.keys()
+
 @app.route("/logout",  methods=['GET', 'POST'])
 def logout():
     try:
@@ -27,6 +34,7 @@ def logout():
     except KeyError:
         return redirect("/")
     return redirect("/")
+
 @app.route("/login",  methods=['GET', 'POST'])
 def login():
     if islogged():
@@ -37,6 +45,7 @@ def login():
     db.commit()
     db.close()
     return render_template('login.html')
+
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     if (request.method == 'POST'):
@@ -67,6 +76,7 @@ def register():
         return redirect("/login")
     else:
         return render_template("register.html")
+        
 @app.route("/auth", methods=['GET', 'POST'])
 def auth():
     if (request.method == 'POST'):

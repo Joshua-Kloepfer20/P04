@@ -3,8 +3,7 @@ Format: firstL -- TIMESTAMP -- changes and/or additions
 danielS -- 2022-05-25 8:37 -- add basic file structure. Add basic stylings.
 juliaN -- 2022-05-25 8:41 -- work on design doc
 juliaN -- 2022-05-25 21:28 -- game mechanics added to design doc, devlog added
-juliaN -- 2022-05-26 21:39 -- more game mechanics and target ship date added to
-design doc
+juliaN -- 2022-05-26 21:39 -- more game mechanics and target ship date added to design doc
 juliaN -- 2022-05-27 8:09 -- second database added to DD to keep track of map
 danielS -- 2022-05-27 8:20 -- add socket.io requirement
 juliaN -- 2022-05-27 8:36 -- sqlite3 database created with node.js
@@ -19,10 +18,14 @@ michaelB -- 2022-06-01 22:45 -- update design doc with updated component map and
 juliaN -- 2022-06-02 8:41 -- arrow keys pressed down keep signaling movement, stop sometimes fails
 juliaN -- 2022-06-02 19:04 -- arrow keys now signal appropriately
 michaelB -- 2022-06-02 20:20 -- add agar spawning and drawing
-juliaN -- 2022-06-02 20:52 -- code associated with arrow keys cleaned up,
-comments added, outline of code required for move added (updating server data
-and consuming other users), DD updated with new game mechanics decided upon
-(not in repo yet because group has access to live DD and process of converting
-to pdf time consuming)
+juliaN -- 2022-06-02 20:52 -- code associated with arrow keys cleaned up, comments added, outline of code required for move added (updating server data and consuming other users), DD updated with new game mechanics decided upon (not in repo yet because group has access to live DD and process of converting to pdf time consuming)
 joshuaK -- 2022-06-03 2:00 -- completed login with correct database
+juliaN -- 2022-06-03 8:12 -- user parameter removed from arrow key movement
+(server will know which client is sending)
+joshuaK -- 2022-06-03 2:00 -- completed login with correct database
+danielS -- 2022-06-03 08:15 -- update file structure. Configure Flask app settings. Add basic templating.
+juliaN -- 2022-06-03 8:38 -- work on functions with math underlying game mechanics
+juliaN -- 2022-06-03 9:58 -- check for user interaction amended
+juliaN -- 2022-06-03 10:12 -- addition of functions to determine eating/being eaten
+danielS -- 2022-06-03 10:41 -- Add more descriptive file names & modularize client code. Update agar spawning. Add basic styling. Add fullscreen, responsive canvas.
 michaelB -- 2022-06-03 14:28 -- integrate movement with client-server communication
