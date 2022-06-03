@@ -24,4 +24,5 @@ comments added, outline of code required for move added (updating server data
 and consuming other users), DD updated with new game mechanics decided upon
 (not in repo yet because group has access to live DD and process of converting
 to pdf time consuming)
-joshuaK -- 2022-06-03 2:00 -- completd login with correct database
+joshuaK -- 2022-06-03 2:00 -- completed login with correct database
+michaelB -- 2022-06-03 14:28 -- integrate movement with client-server communication

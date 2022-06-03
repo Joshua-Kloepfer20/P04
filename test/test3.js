@@ -36,6 +36,7 @@ document.onkeyup = function(){arrowChange(false, "User")};
    // logs that a move occured, upon integration will update server data
    function move(user, key) {
      console.log("move" + user + key);
+     
      // at new position test if can eat any (other users will do same)
      // go through data to see if the inner portion (contained by the circle
      // with in same center but Math.sqrt(9/10) * radius or 90% of the mass) of

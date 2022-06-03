@@ -20,6 +20,7 @@ var spawnAgar = () => {
   console.log(agarPos)
   io.emit("updateFromServer", data, agarPos)
 } 
+
 io.on("connection", (socket) => {
   io.emit("updateFromServer", data, agarPos) // send to all connected clients
   // socket.emit("updateFromServer") // only send to the client who connected
@@ -29,6 +30,9 @@ io.on("connection", (socket) => {
   })
   
   socket.on("updateFromClient", (args) => { // listen from a specific socket
+    if(args == null) { // get data without sending data
+      io.emit("updateFromServer", data, agarPos)
+    }
     console.log("got it")
     user = null
     userdata = []
