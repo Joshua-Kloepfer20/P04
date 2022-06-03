@@ -44,6 +44,23 @@ function isInteracting(xcorA, ycorA, areaA, xcorB, ycorB, areaB) {
   }
 }
 
-// is eating
+// checks if user A is eating
+function isEating(xcorA, ycorA, areaA, xcorB, ycorB, areaB) {
+  // eats if ineracting and
+  if (isInteracting) {
+    // 90% userA mass is greater than or equal to userB mass
+    if (.9 * areaA >= areaB) {
+      return true;
+    }
+  }
+  // returns false otherwise
+  return false;
+}
 
-// is eaten
+// checks if user A is eaten (B is eating)
+function isEaten(xcorA, ycorA, areaA, xcorB, ycorB, areaB) {
+  if (isEating(xcorB, ycorB, areaB, xcorA, ycorA, areaA)) {
+    return true;
+  }
+  return false;
+}
