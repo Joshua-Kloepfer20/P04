@@ -3,10 +3,20 @@
 # Oct 2021
 
 from flask import Flask, render_template
-app = Flask(__name__)
+import os
+
+def create_app():
+    app = Flask(__name__, static_url_path='', static_folder='static')
+    # Configure app key & DB location
+    app.config.from_mapping(
+        SECRET_KEY = os.urandom(32),
+    )
+    return app
+
+app = create_app()
 
 @app.route("/")
-def test_tmplt():
+def home():
     return render_template( 'index.html')
 
 if __name__ == "__main__":

@@ -1,4 +1,8 @@
 const { Server } = require("socket.io");
+var express = require('express');
+var app = express();
+
+app.use(express.static('public'));
 
 const io = new Server({ 
     cors: {
@@ -39,7 +43,5 @@ io.on("connection", (socket) => {
     io.emit("updateFromServer", data)
   });
 });
-
-
 
 io.listen(3000);
