@@ -4,6 +4,8 @@
 {% block content %}
     Hello, World
     <canvas width="500" height="500" id="playground"></canvas>
+    <a href="login">login</a>
+    <a href="logout">logout</a>
     <script src="{{ url_for('static', filename='js/socket.js') }}"></script>
     <script src="{{ url_for('static', filename='js/test.js') }}"></script>    
 {% endblock %}

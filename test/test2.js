@@ -1,6 +1,6 @@
 // Getting key presses
-document.onkeydown = arrowChange(true);
-document.onkeyup = arrowChange(false);
+document.onkeydown = function(){arrowChange(true)};
+document.onkeyup = function(){arrowChange(false)};
 
   function arrowChange(isDown) {
   // Create scheduler for each and have up key cancel
@@ -11,7 +11,7 @@ document.onkeyup = arrowChange(false);
               startMove("Test", "L");
             }
             else {
-              stopMove();
+              stopMove("Test", "L");
             }
             break;
          case 38:
@@ -20,7 +20,7 @@ document.onkeyup = arrowChange(false);
               startMove("Test", "U");
             }
             else {
-              stopMove();
+              stopMove("Test", "U");
             }
             break;
          case 39:
@@ -29,7 +29,7 @@ document.onkeyup = arrowChange(false);
               startMove("Test", "R");
             }
             else {
-              stopMove();
+              stopMove("Test", "R");
             }
             break;
          case 40:
@@ -38,27 +38,78 @@ document.onkeyup = arrowChange(false);
               startMove("Test", "D");
             }
             else {
-              stopMove();
+              stopMove("Test", "D");
             }
             break;
       }
    };
 
-   var timer;
+   var timerL;
+   var timerU;
+   var timerR;
+   var timerD;
 
    function startMove(user, key) {
-   	console.log("starting" + user + key);
-     timer = setInterval(move, .1, user, key);
+   	console.log("starting?" + user + key);
+    changeTimer(user, key, true);
    }
 
    function move(user, key) {
-     console.log("move" + user + key)
+     console.log("move" + user + key);
    }
 
    // stops metronome by clearing interval
-   function stopMove() {
-     console.log("stopping");
+   function stopMove(user, key) {
+     console.log("stopping?");
      // console.log(timer);
-     timer = clearInterval(timer);
-     // console.log(timer);
+     changeTimer(user, key, false);
+   }
+
+   function changeTimer(user, key, isStart) {
+     switch (key) {
+        case "L":
+           if (isStart) {
+             console.log("starting" + user + key);
+             timerL = clearInterval(timerL);
+             timerL = setInterval(move, 1, user, key);
+           }
+           else {
+             console.log("stopping" + user + key);
+             timerL = clearInterval(timerL);
+           }
+           break;
+        case "U":
+           if (isStart) {
+             timerU = clearInterval(timerU);
+             console.log("starting" + user + key);
+             timerU = setInterval(move, 1, user, key);
+           }
+           else {
+             console.log("stopping" + user + key);
+             timerU = clearInterval(timerU);
+           }
+           break;
+        case "R":
+        if (isStart) {
+          timerR = clearInterval(timerR);
+          console.log("starting" + user + key);
+          timerR = setInterval(move, 1, user, key);
+        }
+        else {
+          console.log("stopping" + user + key);
+          timerR = clearInterval(timerR);
+        }
+           break;
+        case "D":
+        if (isStart) {
+          timerD = clearInterval(timerD);
+          console.log("starting" + user + key);
+          timerD = setInterval(move, 1, user, key);
+        }
+        else {
+          console.log("stopping" + user + key);
+          timerD = clearInterval(timerD);
+        }
+           break;
+     }
    }

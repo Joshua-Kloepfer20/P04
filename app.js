@@ -9,21 +9,26 @@ const io = new Server({
         origin: "*"
     }
 });
+const width = 10000;
+const height = 10000;
 // test data - will change later
-var data = {
+var data = { // user: [xcor, ycor, area]
   "X": [250, 250, 10],
-  "Y": [100, 100, 5],
+  "Y": [100, 100, 30],
   "Z": [400, 300, 20]
 }
-var drawDot = () => {
-  console.log("data send")
-};
+var agarPos = [] // store positions of agar
+
+var spawnAgar = () => {
+  agarPos.push([parseInt(Math.random() * 500), parseInt(Math.random() * 500)])
+  console.log(agarPos)
+  io.emit("updateFromServer", data, agarPos)
+} 
 io.on("connection", (socket) => {
-  io.emit("updateFromServer", data) // send to all connected clients
+  io.emit("updateFromServer", data, agarPos) // send to all connected clients
   // socket.emit("updateFromServer") // only send to the client who connected
 
   socket.on("getData", (arg) => {
-    console.log("west virginia")
     socket.emit("giveBackData", data[arg])
   })
   
@@ -40,8 +45,10 @@ io.on("connection", (socket) => {
     }
     data[user] = userdata
     console.log(data)
-    io.emit("updateFromServer", data)
+    io.emit("updateFromServer", data, agarPos)
   });
 });
 
+
+setInterval(spawnAgar, 1000) // create new agar every second
 io.listen(3000);
