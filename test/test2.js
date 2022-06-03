@@ -1,115 +1,47 @@
-// Getting key presses
-document.onkeydown = function(){arrowChange(true)};
-document.onkeyup = function(){arrowChange(false)};
+var dict = { // user: [xcor, ycor, area]
+  "X": [250, 250, 10],
+  "Y": [100, 100, 30],
+  "Z": [400, 300, 20]
+};
 
-  function arrowChange(isDown) {
-  // Create scheduler for each and have up key cancel
-      switch (event.keyCode) {
-         case 37:
-            console.log("Left key.");
-            if (isDown) {
-              startMove("Test", "L");
-            }
-            else {
-              stopMove("Test", "L");
-            }
-            break;
-         case 38:
-            console.log("Up key.");
-            if (isDown) {
-              startMove("Test", "U");
-            }
-            else {
-              stopMove("Test", "U");
-            }
-            break;
-         case 39:
-            console.log("Right key.");
-            if (isDown) {
-              startMove("Test", "R");
-            }
-            else {
-              stopMove("Test", "R");
-            }
-            break;
-         case 40:
-            console.log("Down key.");
-            if (isDown) {
-              startMove("Test", "D");
-            }
-            else {
-              stopMove("Test", "D");
-            }
-            break;
-      }
-   };
+// gets radius associated with the cell's mass
+function getRadius(area) {
+  return Math.sqrt(
+    area / Math.PI
+  );
+};
 
-   var timerL;
-   var timerU;
-   var timerR;
-   var timerD;
+// gets the radius assosciated with 90% of the blob's mass
+function getInnerRadius(area) {
+  return Math.sqrt(
+    .9 * area / Math.PI
+  );
+}
 
-   function startMove(user, key) {
-   	console.log("starting?" + user + key);
-    changeTimer(user, key, true);
-   }
+// gets distance between centers of two cells
+function getCenterDistance(xcorA, ycorA, xcorB, ycorB) {
+  return Math.sqrt(
+    Math.pow((xcorA - xcorB), 2)
+    +
+    Math.pow((ycorA - ycorB), 2)
+  );
+}
 
-   function move(user, key) {
-     console.log("move" + user + key);
-   }
+// checks if close enough for interaction
+function isInteracting(xcorA, ycorA, areaA, xcorB, ycorB, areaB) {
+  var distance = getCenterDistance(xcorA, ycorA, xcorB, ycorB);
+  // gives distance close enough for interaction (wrong rn)
+  var close = Math.min(
+    getInnerRadius(areaA), getInnerRadius(areaB)
+  );
+  if (distance <= close) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}
 
-   // stops metronome by clearing interval
-   function stopMove(user, key) {
-     console.log("stopping?");
-     // console.log(timer);
-     changeTimer(user, key, false);
-   }
+// is eating
 
-   function changeTimer(user, key, isStart) {
-     switch (key) {
-        case "L":
-           if (isStart) {
-             console.log("starting" + user + key);
-             timerL = clearInterval(timerL);
-             timerL = setInterval(move, 1, user, key);
-           }
-           else {
-             console.log("stopping" + user + key);
-             timerL = clearInterval(timerL);
-           }
-           break;
-        case "U":
-           if (isStart) {
-             timerU = clearInterval(timerU);
-             console.log("starting" + user + key);
-             timerU = setInterval(move, 1, user, key);
-           }
-           else {
-             console.log("stopping" + user + key);
-             timerU = clearInterval(timerU);
-           }
-           break;
-        case "R":
-        if (isStart) {
-          timerR = clearInterval(timerR);
-          console.log("starting" + user + key);
-          timerR = setInterval(move, 1, user, key);
-        }
-        else {
-          console.log("stopping" + user + key);
-          timerR = clearInterval(timerR);
-        }
-           break;
-        case "D":
-        if (isStart) {
-          timerD = clearInterval(timerD);
-          console.log("starting" + user + key);
-          timerD = setInterval(move, 1, user, key);
-        }
-        else {
-          console.log("stopping" + user + key);
-          timerD = clearInterval(timerD);
-        }
-           break;
-     }
-   }
+// is eaten

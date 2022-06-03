@@ -40,6 +40,7 @@ document.onkeyup = function(){arrowChange(false)};
      // if so, checks to see if the mass of the user is <= 90% of this one
      // if it is, this user consumes other and recieves 90% of mass and radius
      // recalculated
+     // other user needs to check if gets eaten
    }
 
    function changeTimer(key, isStart) {
