@@ -30,3 +30,4 @@ juliaN -- 2022-06-03 8:12 -- user parameter removed from arrow key movement
 danielS -- 2022-06-03 08:15 -- update file structure. Configure Flask app settings. Add basic templating.
 juliaN -- 2022-06-03 8:38 -- work on functions with math underlying game
 mechanics
+juliaN -- 2022-06-03 9:58 -- check for user interaction amended

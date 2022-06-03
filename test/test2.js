@@ -30,10 +30,12 @@ function getCenterDistance(xcorA, ycorA, xcorB, ycorB) {
 // checks if close enough for interaction
 function isInteracting(xcorA, ycorA, areaA, xcorB, ycorB, areaB) {
   var distance = getCenterDistance(xcorA, ycorA, xcorB, ycorB);
+  console.log("Distance: " + distance)
   // gives distance close enough for interaction (wrong rn)
-  var close = Math.min(
-    getInnerRadius(areaA), getInnerRadius(areaB)
-  );
+  var close = getInnerRadius(areaA) + getInnerRadius(areaB);
+  console.log("Inner Radius A: " + getInnerRadius(areaA));
+  console.log("Inner Radius B: " + getInnerRadius(areaB));
+  console.log("Close: " + close);
   if (distance <= close) {
     return true;
   }
