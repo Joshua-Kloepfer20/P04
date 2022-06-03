@@ -28,3 +28,4 @@ juliaN -- 2022-06-03 8:12 -- user parameter removed from arrow key movement
 (server will know which client is sending)
 joshuaK -- 2022-06-03 2:00 -- completd login with correct database
 danielS -- 2022-06-03 08:15 -- update file structure. Configure Flask app settings. Add basic templating.
+danielS -- 2022-06-03 10:41 -- Add more descriptive file names & modularize client code. Update agar spawning. Add basic styling. Add fullscreen, responsive canvas.
