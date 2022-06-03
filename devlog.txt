@@ -3,7 +3,8 @@ Format: firstL -- TIMESTAMP -- changes and/or additions
 danielS -- 2022-05-25 8:37 -- add basic file structure. Add basic stylings.
 juliaN -- 2022-05-25 8:41 -- work on design doc
 juliaN -- 2022-05-25 21:28 -- game mechanics added to design doc, devlog added
-juliaN -- 2022-05-26 21:39 -- more game mechanics and target ship date added to design doc
+juliaN -- 2022-05-26 21:39 -- more game mechanics and target ship date added to
+design doc
 juliaN -- 2022-05-27 8:09 -- second database added to DD to keep track of map
 danielS -- 2022-05-27 8:20 -- add socket.io requirement
 juliaN -- 2022-05-27 8:36 -- sqlite3 database created with node.js
@@ -18,3 +19,8 @@ michaelB -- 2022-06-01 22:45 -- update design doc with updated component map and
 juliaN -- 2022-06-02 8:41 -- arrow keys pressed down keep signaling movement, stop sometimes fails
 juliaN -- 2022-06-02 19:04 -- arrow keys now signal appropriately
 michaelB -- 2022-06-02 20:20 -- add agar spawning and drawing
+juliaN -- 2022-06-02 20:52 -- code associated with arrow keys cleaned up,
+comments added, outline of code required for move added (updating server data
+and consuming other users), DD updated with new game mechanics decided upon
+(not in repo yet because group has access to live DD and process of converting
+to pdf time consuming)
