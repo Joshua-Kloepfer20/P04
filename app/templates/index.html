@@ -3,8 +3,12 @@
 
 {% block content %}
     <canvas width="500" height="500" id="game"></canvas>
+    <p>Hi, {{user}}!</p>
     <a href="login">login</a>
     <a href="logout">logout</a>
+    <script>
+        var user = "{{user}}"
+    </script>
     <script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
     <script src="{{ url_for('static', filename='js/setup.js') }}"></script>
     <script src="{{ url_for('static', filename='js/draw.js') }}"></script>    

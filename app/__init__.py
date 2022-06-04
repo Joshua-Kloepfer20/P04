@@ -14,17 +14,19 @@ app = create_app()
 
 app.secret_key = urandom(32)
 
-@app.route("/")
+def islogged():
+    return 'username' in session.keys()
+
+@app.route("/game")
 def test_tmplt():
+    if(not(islogged())):
+        return redirect("/")
     db = sqlite3.connect("users.db")
     c = db.cursor()
     c.execute("CREATE TABLE IF NOT EXISTS users(Username TEXT, Password TEXT, HighScore INT, UNIQUE(username))")
     db.commit()
     db.close()
-    return render_template( 'index.html')
-
-def islogged():
-    return 'username' in session.keys()
+    return render_template('index.html', user=session["username"])
 
 @app.route("/logout",  methods=['GET', 'POST'])
 def logout():
@@ -35,10 +37,10 @@ def logout():
         return redirect("/")
     return redirect("/")
 
-@app.route("/login",  methods=['GET', 'POST'])
+@app.route("/",  methods=['GET', 'POST'])
 def login():
     if islogged():
-        return redirect("/")
+        return redirect("/game")
     db = sqlite3.connect("users.db")
     c = db.cursor()
     c.execute("CREATE TABLE IF NOT EXISTS users(Username TEXT, Password TEXT, HighScore INT, UNIQUE(username))")
@@ -73,7 +75,7 @@ def register():
             return render_template("register.html", error="Username taken already")
         db.commit()
         db.close()
-        return redirect("/login")
+        return redirect("/")
     else:
         return render_template("register.html")
         
@@ -102,11 +104,11 @@ def auth():
                 session['password'] = password
                 print(session['username'])
         db.close()
-        return redirect('/')
+        return redirect('/game')
 
     #get method
     else:
-        return redirect('/login')
+        return redirect('/')
 
 
 if __name__ == "__main__":

@@ -30,3 +30,4 @@ juliaN -- 2022-06-03 10:12 -- addition of functions to determine eating/being ea
 danielS -- 2022-06-03 10:41 -- Add more descriptive file names & modularize client code. Update agar spawning. Add basic styling. Add fullscreen, responsive canvas.
 michaelB -- 2022-06-03 14:28 -- integrate movement with client-server communication
 michaelB -- 2022-06-03 14:59 -- integrate new changes in refactored code
+michaelB -- 2022-06-03 23:45 -- change paths for login system, include username in game

@@ -12,16 +12,11 @@ const io = new Server({
 const mapWidth = 10000;
 const mapHeight = 10000;
 // test data - will change later
-var data = { // user: [xcor, ycor, area]
-  "X": [250, 250, 10],
-  "Y": [100, 100, 30],
-  "Z": [400, 300, 20]
-}
+var data = {} // user: [xcor, ycor, area]
 var agarPos = [] // store positions of agar
 
 var spawnAgar = () => {
   agarPos.push([parseInt(Math.random() * mapWidth), parseInt(Math.random() * mapHeight)])
-  console.log(agarPos)
   io.emit("updateFromServer", data, agarPos)
 } 
 
