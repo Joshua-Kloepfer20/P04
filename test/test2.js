@@ -120,6 +120,6 @@ function isEating(xcorA, ycorA, areaA, xcorB, ycorB, areaB) {
 function isEatingAgar(xcorA, ycorA, areaA, xcorB, ycorB) {
   var distance = getCenterDistance(xcorA, ycorA, xcorB, ycorB);
   var radius = getRadius(areaA);
-  if (radius <= distance) return true;
+  if (radius >= distance) return true;
   return false;
 }
