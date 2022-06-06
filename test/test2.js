@@ -1,6 +1,7 @@
 var users = { // user: [xcor, ycor, area]
   "X": [250, 250, 10],
   "Y": [100, 100, 30],
+  "A": [250, 250, 8],
   "Z": [400, 300, 20]
 };
 
@@ -21,9 +22,8 @@ var viruses = { // user: [xcor, ycor, area]
 function update(user) {
   console.log("Users: " + JSON.stringify(users));
   for (let k in users) {
-    console.log(k);
+    console.log("On user " + k);
     if (k != user) {
-      console.log("Users: " + JSON.stringify(users));
       // check if user eats other user
       if (
         isEating(
@@ -33,12 +33,14 @@ function update(user) {
         )
       ) // updates if so
       {
+        console.log(user + " eating " + k);
         users[user][2] += .9 * users[k][2];
         // delete object.keyname;
         delete users[k];
+        console.log("Users: " + JSON.stringify(users));
       }
       // check if other user eats user
-      if (
+      else if (
         isEating(
           // users[user][0] <- example syntax to retrieve value
           users[k][0], users[k][1], users[k][2],
@@ -46,9 +48,13 @@ function update(user) {
         )
       ) // updates if so
       {
+        console.log(k + " eating " + user);
         users[k][2] += .9 * users[user][2];
-        // delete object.keyname;
-        delete users.user;
+        // delete object.keyname; or
+        // delete object["keyname"];
+        delete users[user];
+        console.log("Users: " + JSON.stringify(users));
+        break;
       }
     }
   }
@@ -97,7 +103,8 @@ function isInteracting(xcorA, ycorA, areaA, xcorB, ycorB, areaB) {
 // checks if user A is eating a user or virus
 function isEating(xcorA, ycorA, areaA, xcorB, ycorB, areaB) {
   // eats if ineracting and
-  if (isInteracting) {
+  console.log("Interacting? " + isInteracting(xcorA, ycorA, areaA, xcorB, ycorB, areaB));
+  if (isInteracting(xcorA, ycorA, areaA, xcorB, ycorB, areaB)) {
     // 90% userA mass is greater than or equal to userB mass
     if (.9 * areaA >= areaB) {
       return true;

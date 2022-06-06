@@ -33,3 +33,4 @@ michaelB -- 2022-06-03 14:59 -- integrate new changes in refactored code
 michaelB -- 2022-06-03 23:45 -- change paths for login system, include username in game
 juliaN -- 2022-06-05 14:38 -- work on integrating game mechanics into one update function
 juliaN -- 2022-06-05 14:54 -- fixed function to determine if eating agar
+juliaN -- 2022-06-06 8:39 -- users eating each other corrected and integrated
