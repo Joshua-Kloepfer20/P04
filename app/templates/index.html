@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block title %}Untitled Circle Game{% endblock %}
 
+{% block expand_head %}        
+<link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+{% endblock %}
+
 {% block content %}
     <canvas width="500" height="500" id="game"></canvas>
     <p>Hi, {{user}}!</p>
@@ -9,7 +13,11 @@
     <script>
         var user = "{{user}}"
     </script>
+    <!-- Utility scripts -->
     <script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/util.js') }}"></script>
+
+    <!-- Game scripts -->
     <script src="{{ url_for('static', filename='js/setup.js') }}"></script>
     <script src="{{ url_for('static', filename='js/draw.js') }}"></script>    
     <script src="{{ url_for('static', filename='js/client.js') }}"></script>
