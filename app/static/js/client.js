@@ -126,14 +126,22 @@ var move = (key) => {
     if(!ran) { // this will make it not run multiple times
       if(actualKey == 37) {
         console.log("left")
-        args[0] -= 1
+        for (let i = 0; i < 5; i++) {
+          args[i][0] -= 1
+        }
       } else if(actualKey == 39) {
         console.log("right")
-        args[0] += 1
+        for (let i = 0; i < 5; i++) {
+          args[i][0] += 1
+        }
       } else if(actualKey == 38) {
-        args[1] -= 1
+        for (let i = 0; i < 5; i++) {
+          args[i][1] -= 1
+        }
       } else if(actualKey == 40) {
-        args[1] += 1
+        for (let i = 0; i < 5; i++) {
+          args[i][1] += 1
+        }
       }
       console.log(args)
       // update the position
@@ -144,24 +152,36 @@ var move = (key) => {
 }
 
 var split = () => {
-  socket.emit("getList")
-  socket.on("giveList", (args) => {
+  socket.emit("getData")
+  socket.on("giveBackdata", (args) => {
     //console.log(args[myUsername][0])
     console.log("yes")
     timerM = clearInterval(timerM)
+    curtime = Date.now()
     theta = Math.atan((mouseY - center_y) / (mouseX - center_x)) * 180 / Math.PI
-    timerM = setInterval(shoot, 1000)
+    let i = 1
+    let smallest = [0, getCenterDistance(args[0][0], args[0][1], mouseX, mouseY)]
+    while (i < args.length) {
+      let distance = getCenterDistance(args[i][0], args[i][1], mouseX, mouseY)
+      if (distance < smallest[1]) {
+        smallest[0] = i
+        smallest[1] = distance
+      }
+      i++
+    }
+    args.push([args[smallest[0]][0], args[smallest[0]][1], Math.pow(Math.sqrt(args[smallest[0]][2] / Math.PI) / 2, 2) * Math.PI])
+    timerM = setInterval(shoot, 1000, args, smallest)
     //console.log(mouseX)
     //console.log(mouseY)
   })
 }
 
-var shoot = () => {
-  if (new Date().getSeconds() - curtime.getSeconds() > 5) {
+var shoot = (args, smallest) => {
+  if (Date.now() - curtime > 5000) {
     timerM = clearInterval(timerM)
   }
   else {
-    console.log(theta)
+    
   }
 }
 
