@@ -1,18 +1,48 @@
 $arial: 'Arial', sans-serif;
 
-html, body {
+
+$white: #FFFFFF;
+$blue: #2645dd;
+$red: #e90000;
+$yellow: #f3be00;
+$gray: #b4b4b4;
+
+$color-list: (
+    "white" #FFFFFF,
+    "blue" #2645dd,
+    "red" #e90000,
+    "yellow" #f3be00,
+    "gray" #b4b4b4
+);
+
+
+@mixin fill-container {
     width: 100%;
     height: 100%;
-    padding: 0;
-    margin: 0;
-
-    font-family: $arial;
-
-    overflow: hidden;
 }
 
-#game {
-    position: absolute;
-    top: 0;
-    left: 0;
+@mixin transition($x...) {
+    // Ensures cross-browser support
+    -webkit-transition: $x;
+    -moz-transition: $x;
+    -ms-transition: $x;
+    -o-transition: $x;
+    transition: $x;
+}
+
+@mixin bg_border($color) {
+    background-color: $color;
+    border-color: $color;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    @include fill-container;
+    padding: 0;
+    margin: 0;
+    
+    font-family: $arial;
 }

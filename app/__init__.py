@@ -38,6 +38,12 @@ def logout():
     return redirect("/")
 
 @app.route("/",  methods=['GET', 'POST'])
+def home():
+    if islogged():
+        return redirect("/game")
+    return render_template('landing.html')
+
+@app.route("/login", methods=['GET', 'POST'])
 def login():
     if islogged():
         return redirect("/game")
@@ -46,10 +52,12 @@ def login():
     c.execute("CREATE TABLE IF NOT EXISTS users(Username TEXT, Password TEXT, HighScore INT, UNIQUE(username))")
     db.commit()
     db.close()
-    return render_template('landing.html')
+    return render_template('login.html')
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
+    if islogged():
+        return redirect("/game")
     if (request.method == 'POST'):
         username = request.form.get("username")
         password = request.form.get("password")

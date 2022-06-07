@@ -1,19 +1,23 @@
 {% extends "base.html" %}
 {% block title %}Untitled Circle Game{% endblock %}
 
+{% block expand_head %}        
+<link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+{% endblock %}
+
 {% block content %}
-<div class="layout-container">
+<div id="landing-container">
     <div class="menu-panel">
         <h1>Untitled Circle<br>Game</h1>
-        <div class="button-container">
-            <div>BUTTON</div>
-            <div>BUTTON</div>
+        <div class="btn-container">
+            <div class="btn btn-fill-blue" onclick="window.location='/login'" >LOGIN</div>
+            <div class="btn btn-outline-gray" onclick="window.location='/register'">REGISTER</div>
         </div>
     </div>
     <div class="design-panel">
-        <svg height="100" width="100">
-            <circle cx="50" cy="50" r="40" fill="red" />
-        </svg>
+        <div class="circle-yellow small"></div>
+        <div class="circle-red medium"></div>
+        <div class="circle-blue big"></div>
     </div>
 </div>
 {% endblock %}
