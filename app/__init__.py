@@ -46,7 +46,7 @@ def login():
     c.execute("CREATE TABLE IF NOT EXISTS users(Username TEXT, Password TEXT, HighScore INT, UNIQUE(username))")
     db.commit()
     db.close()
-    return render_template('login.html')
+    return render_template('landing.html')
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
