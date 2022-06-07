@@ -16,9 +16,9 @@ var users = { // user: [xcor, ycor, area]
 };
 
 var agar = [ // [xcor, ycor]
-  [5, 9],
-  [8, 3],
-  [2, 4]
+  [100, 100, 17],
+  [8, 3, 3],
+  [2, 4, 1]
 ];
 
 var viruses = { // user: [xcor, ycor, area]
@@ -31,9 +31,10 @@ var viruses = { // user: [xcor, ycor, area]
 // call at the end of each move
 function update(user) {
   console.log("Users: " + JSON.stringify(users));
+
+  // determines eating between users
   for (let k in users) {
     console.log("On user " + k);
-    // determines eating between users
     if (k != user) {
       for (let l in users[user]) {
         // console.log(users[user][l]);
@@ -79,6 +80,25 @@ function update(user) {
       }
     }
   }
+
+  // determines eating with agar
+  for (let i in users[user]) {
+    for (let k in agar) {
+      // determines if any agar close enough to eat
+      if (
+        isEatingAgar(
+          users[user][i][0], users[user][i][1], users[user][i][2],
+          agar[k][0], agar[k][1], agar[k][2]
+        )
+      )
+      // updates if so
+      {
+        users[user][i][2] += agar[k][2];
+        delete agar[k];
+      }
+    }
+  }
+
 };
 
 // gets radius associated with the cell's mass
@@ -121,7 +141,7 @@ function isInteracting(xcorA, ycorA, areaA, xcorB, ycorB, areaB) {
   }
 }
 
-// checks if user A is eating a user or virus
+// checks if user A is eating
 function isEating(xcorA, ycorA, areaA, xcorB, ycorB, areaB) {
   // eats if ineracting and
   console.log("Interacting? " + isInteracting(xcorA, ycorA, areaA, xcorB, ycorB, areaB));
@@ -145,9 +165,19 @@ function isEating(xcorA, ycorA, areaA, xcorB, ycorB, areaB) {
 // }
 
 // checks if user A is eating agar
-function isEatingAgar(xcorA, ycorA, areaA, xcorB, ycorB) {
+// as long as two cells are close enough to touch, eating will occur
+function isEatingAgar(xcorA, ycorA, areaA, xcorB, ycorB, areaB) {
   var distance = getCenterDistance(xcorA, ycorA, xcorB, ycorB);
-  var radius = getRadius(areaA);
-  if (radius >= distance) return true;
-  return false;
+  console.log("Distance: " + distance)
+  // gives distance close enough for interaction (wrong rn)
+  var close = getRadius(areaA) + getRadius(areaB);
+  console.log("Radius A: " + getRadius(areaA));
+  console.log("Radius B: " + getRadius(areaB));
+  console.log("Close: " + close);
+  if (distance <= close) {
+    return true;
+  }
+  else {
+    return false;
+  }
 }
