@@ -33,46 +33,50 @@ function update(user) {
   console.log("Users: " + JSON.stringify(users));
   for (let k in users) {
     console.log("On user " + k);
+    // determines eating between users
     if (k != user) {
       for (let l in users[user]) {
         // console.log(users[user][l]);
         for (let m in users[k]) {
-          // console.log(m);
-          // console.log(users[k][m]);
-          // NOTE: Determine appropriate breaks of loops with KTS
+          console.log(m);
+          console.log(users[k][m]);
+          if (
+            // determines if one cell of user is eating one of other user
+            isEating(
+              // users[user][l] <- example syntax to retrieve value
+              users[user][l][0], users[user][l][1], users[user][l][2],
+              users[k][m][0], users[k][m][1], users[k][m][2]
+            )
+          ) // updates if so
+          {
+            console.log(user + "[" + l + "]" + " eating " + m + "[" + l + "]");
+            users[user][l][2] += .9 * users[k][m][2];
+            // delete object.keyname;
+            delete users[k][m];
+            console.log("Users: " + JSON.stringify(users));
+          }
+          // determines if one cell of other user is eating one of user
+          else if (
+            isEating(
+              // users[user][0] <- example syntax to retrieve value
+              users[k][m][0], users[k][m][1], users[k][m][2],
+              users[user][l][0], users[user][l][1], users[user][l][2]
+            )
+          ) // updates if so
+          {
+            console.log(k + "[" + m + "]" + " eating " + user + "[" + l + "]");
+            users[k][m][2] += .9 * users[user][l][2];
+            // delete object.keyname; or
+            // delete object["keyname"];
+            delete users[user][l];
+            console.log("Users: " + JSON.stringify(users));
+            // if users[user][l] deleted stops iterating through different
+            // users[k][m] to look for interactions with that users[user][l]
+            // since it is null (not required)
+            break;
+          }
         }
       }
-      // if (
-      //   isEating(
-      //     // users[user][0] <- example syntax to retrieve value
-      //     users[user][0][0], users[user][0][1], users[user][0][2],
-      //     users[k][0][0], users[k][0][1], users[k][0][2]
-      //   )
-      // ) // updates if so
-      // {
-      //   console.log(user + " eating " + k);
-      //   users[user][0][2] += .9 * users[k][0][2];
-      //   // delete object.keyname;
-      //   delete users[k][0];
-      //   console.log("Users: " + JSON.stringify(users));
-      // }
-      // // check if other user eats user
-      // else if (
-      //   isEating(
-      //     // users[user][0] <- example syntax to retrieve value
-      //     users[k][0][0], users[k][0][1], users[k][0][2],
-      //     users[user][0][0], users[user][0][1], users[user][0][2]
-      //   )
-      // ) // updates if so
-      // {
-      //   console.log(k + " eating " + user);
-      //   users[k][0][2] += .9 * users[user][0][2];
-      //   // delete object.keyname; or
-      //   // delete object["keyname"];
-      //   delete users[user][0];
-      //   console.log("Users: " + JSON.stringify(users));
-      //   break;
-      // }
     }
   }
 };

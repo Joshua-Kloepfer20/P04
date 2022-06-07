@@ -40,3 +40,4 @@ danielS -- 2022-06-06 23:54 -- add landing page & stylings, update routing
 joshuaK -- 2022-06-07 4:50 -- began working on split
 juliaN -- 2022-06-07 8:27 -- test4.js has updated data structure, correcting eating in progress
 juliaN -- 2022-06-07 8:38 -- work on rectifying eating
+juliaN -- 2022-06-07 9:04 -- users eating each other updated to facilitate users having multiple cells (test4.js)
