@@ -38,3 +38,4 @@ danielS -- 2022-06-06 08:51 -- add camera movement (player stays in the center)
 danielS -- 2022-06-06 22:45 -- add landing page skeleton
 danielS -- 2022-06-06 23:54 -- add landing page & stylings, update routing
 joshuaK -- 2022-06-07 4:50 -- began working on split
+joshuaK -- 2022-06-07 8:37 -- continued split, edited move
