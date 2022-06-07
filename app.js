@@ -27,6 +27,10 @@ io.on("connection", (socket) => {
   socket.on("getData", (arg) => {
     socket.emit("giveBackData", data[arg])
   })
+
+  socket.on("getList", () => {
+    socket.emit("giveList", data)
+  })
   
   socket.on("updateFromClient", (args) => { // listen from a specific socket
     if(args == null) { // get data without sending data

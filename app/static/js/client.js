@@ -5,7 +5,8 @@ var sendUpdate = (myPositionX, myPositionY, mySize) => {
   socket.on("updateFromServer", (players, agar) => {
     drawGame(players, agar)
   });
-
+var mouseX = 0;
+var mouseY = 0;
 // Getting key presses
 // Calls function that sees if an arrow key was pressed along with parameter
 // stating whether a keydown (true) or keyup event occured
@@ -16,7 +17,7 @@ document.onkeyup = function(){arrowChange(false, "User")};
   var key = event.keyCode;
       // determines if an arrow key was pressed
       switch (key) {
-         case 37: case 38: case 39: case 40:
+         case 37: case 38: case 39: case 40: case 32:
             // if a keydown event occured, starts movement by calling change
             // timer with isStart as true
             if (isDown) {
@@ -40,6 +41,10 @@ document.onkeyup = function(){arrowChange(false, "User")};
    var timerU;
    var timerR;
    var timerD;
+   var pressed = false;
+   var timerM;
+   var theta;
+   var curtime = new Date();
 
    function changeTimer(user, key, isStart) {
     console.log(key)
@@ -99,6 +104,16 @@ document.onkeyup = function(){arrowChange(false, "User")};
             timerD = clearInterval(timerD);
           }
            break;
+        case 32:
+          if (isStart) {
+            pressed = true
+            
+          }
+          else if (pressed == true) {
+            split()
+            pressed = false
+          }
+          break;
      }
    }
 
@@ -127,3 +142,33 @@ var move = (key) => {
     }
  })
 }
+
+var split = () => {
+  socket.emit("getList")
+  socket.on("giveList", (args) => {
+    //console.log(args[myUsername][0])
+    console.log("yes")
+    timerM = clearInterval(timerM)
+    theta = Math.atan((mouseY - center_y) / (mouseX - center_x)) * 180 / Math.PI
+    timerM = setInterval(shoot, 1000)
+    //console.log(mouseX)
+    //console.log(mouseY)
+  })
+}
+
+var shoot = () => {
+  if (new Date().getSeconds() - curtime.getSeconds() > 5) {
+    timerM = clearInterval(timerM)
+  }
+  else {
+    console.log(theta)
+  }
+}
+
+addEventListener("mousemove", function(e) {
+  var rect = c.getBoundingClientRect()
+  mouseX = e.clientX - rect.left
+  mouseY = e.clientY - rect.top
+  //mouseX = e.mouseX;
+  //mouseY = e.mouseY;
+})
