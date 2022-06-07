@@ -1,11 +1,18 @@
 var users = { // user: [xcor, ycor, area]
   "X": [
-    [100, 100, 10],
-    [250, 250, 10]
+    [250, 250, 10],
+    [100, 100, 30]
   ],
-  "Y": [[100, 100, 30]],
-  "A": [[250, 250, 8]],
-  "Z": [[400, 300, 20]]
+  "Y": [
+    [100, 100, 10],
+  ],
+  "A": [
+    [250, 250, 8]
+  ],
+  "Z": [
+    [400, 300, 20],
+    [50, 50, 30]
+  ]
 };
 
 var agar = [ // [xcor, ycor]
@@ -27,8 +34,14 @@ function update(user) {
   for (let k in users) {
     console.log("On user " + k);
     if (k != user) {
-      // check if user eats other user
-      users[k].forEach(cellEat);
+      for (let l in users[user]) {
+        // console.log(users[user][l]);
+        for (let m in users[k]) {
+          // console.log(m);
+          // console.log(users[k][m]);
+          // NOTE: Determine appropriate breaks of loops with KTS
+        }
+      }
       // if (
       //   isEating(
       //     // users[user][0] <- example syntax to retrieve value
