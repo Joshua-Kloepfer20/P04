@@ -4,7 +4,7 @@ var users = { // user: [xcor, ycor, area]
     [100, 100, 30]
   ],
   "Y": [
-    [100, 100, 40],
+    [100, 100, 10],
   ],
   "A": [
     [250, 250, 8]
@@ -52,8 +52,9 @@ function update(user) {
           {
             console.log(user + "[" + l + "]" + " eating " + m + "[" + l + "]");
             users[user][l][2] += .9 * users[k][m][2];
-            // delete object.keyname;
+            // deletes eaten cell
             delete users[k][m];
+            // if cell attributes are empty, deletes cell
             users[k] = users[k].filter(Boolean);
             console.log("Users: " + JSON.stringify(users));
           }
@@ -68,9 +69,9 @@ function update(user) {
           {
             console.log(k + "[" + m + "]" + " eating " + user + "[" + l + "]");
             users[k][m][2] += .9 * users[user][l][2];
-            // delete object.keyname; or
-            // delete object["keyname"];
+            // deletes eaten cell
             delete users[user][l];
+            // if cell attributes are empty, deletes cell
             users[user] = users[user].filter(Boolean);
             console.log("Users: " + JSON.stringify(users));
             // if users[user][l] deleted stops iterating through different
@@ -79,6 +80,13 @@ function update(user) {
             break;
           }
         }
+      }
+      // Deletes users with no cells on map from dictionary
+      if (users[user].length == 0) {
+        delete users[user];
+      }
+      if (users[k].length == 0) {
+        delete users[k];
       }
     }
   }
