@@ -1,37 +1,39 @@
-{% block title %} Login {% endblock %}
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
 
-{% block css %}
-<style>
-    .mb-3{
-      width:300px;
-    }
-    .container{
-      text-align:center
-    }
-</style>
+{% block expand_head %}        
+<link rel="stylesheet" href="{{ url_for('static', filename='css/logister.css') }}">
 {% endblock %}
 
-{% block body %}
-    <h1>Login</h1>
-    <form action="/auth", method="POST">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input class="credential-input form-control" type="text" name="username">
-          </div>
+{% block content %}
+<div id="logister-container">
+  <div class="menu-panel">
+      <h1>Login</h1>
+      <form class="form-container" action="/auth", method="POST">
+        
+        <div class="credential-container">
+          <input name="username" class="credential-input" type="text" placeholder="Username">
+          <svg xmlns="http://www.w3.org/2000/svg" class="credential-icon bi bi-person" viewBox="0 0 16 16">
+            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+          </svg>
         </div>
-        <div class="row justify-content-center">
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input class="credential-input form-control" type="password" name="password">
-          </div>
+        <div class="credential-container">
+          <input name="password" class="credential-input" type="password" placeholder="Password">
+          <svg xmlns="http://www.w3.org/2000/svg" class="credential-icon bi bi-lock" viewBox="0 0 16 16">
+            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+          </svg>
         </div>
-        <input id="credential-submit" type="submit" class="btn btn-secondary" value="Login">
-        <br>
-        <p style="color: red">{{ error }}</p>
-        <p> Don't have an account, yet? Please, <a href= "register"> register </a>! </p>
-      </div>
-    </form>
-
+        <span class="error">{{ error }}</span>
+        <div class="btn-container">
+          <button id="register-submit" type="submit" class="btn btn-fill-blue">Login</button>
+        </div>
+        <p>Don't have an account? <a href= "register">Register here</a></p>
+      </form>
+  </div>
+  <div class="design-panel">
+      <div class="circle-yellow small"></div>
+      <div class="circle-red medium"></div>
+      <div class="circle-blue big"></div>
+  </div>
+</div>
 {% endblock %}

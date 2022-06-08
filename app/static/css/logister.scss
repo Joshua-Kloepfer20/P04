@@ -1,0 +1,154 @@
+@use 'style' as *;
+@use 'sass:color';
+
+#logister-container {
+    @include fill-container;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-content: center;
+    padding: 0px calc(50px + 8vw);
+}
+
+.error {
+    color: $red;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.credential-container {
+    display: grid;
+    width: calc(300px + 5vw);
+    align-items: center;
+    grid-template-areas: "icon input";
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+
+    .credential-icon {
+        grid-area: icon;
+        height: 22px;
+        transition: fill .1s ease, transform .1s cubic-bezier(.59,1.47,.88,1.37);
+    }
+
+    .credential-input {
+        grid-area: input;
+        padding: 10px;
+        font-weight: 400;
+        border: none;
+        border-bottom: 2px solid $black;
+        transition: border-color .1s ease;
+        
+        &:focus-visible {
+            outline: none;
+            border-color: $blue;
+        }
+        
+        &:focus-visible ~ .credential-icon {
+            fill: $blue;
+            transform: translateX(-5px);
+        }
+    }
+    
+}
+
+
+h1 {
+    font-size: 6rem;
+    margin: 0 0 3rem;
+}
+
+.btn-container {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 15px;
+
+    .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        padding: 20px 20px;
+        width: 150px;
+        border-radius: 5px;
+
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 600;
+        cursor: pointer;
+
+        @include transition(
+            letter-spacing cubic-bezier(.17,.67,.72,1.6) .15s,
+            background-color ease-out .10s,
+            border-color ease-out .10s
+        );
+
+        &:hover {
+            letter-spacing: 3px;
+        }
+    }
+    
+    @each $name, $col in $color-list {
+        .btn-fill-#{$name} {
+            @include bg_border($col);
+            color: $white;
+
+            &:hover {
+                @include bg_border(color.scale($col, $lightness: 20%));
+            }
+        }
+
+        .btn-outline-#{$name} {
+            border: 3px solid $col;
+            color: $col;
+
+            &:hover {
+                border-color: color.scale($col, $lightness: 20%);
+                color: color.scale($col, $lightness: 20%);
+            }
+        }
+    }
+
+}
+
+.design-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    
+    @each $name, $col in $color-list {
+        .circle-#{$name} {
+            border-radius: 50%;
+            background-color: $col;
+        }
+    }
+
+    .big {
+        width: 200px;
+        height: 200px;
+        animation: float infinite ease 10s .5s forwards;
+    }
+
+    .medium {
+        width: 150px;
+        height: 150px;
+        animation: float infinite ease 5s 1s forwards;
+    }
+
+    .small {
+        width: 100px;
+        height: 100px;
+        animation: float infinite ease 4s 0s forwards;
+    }
+}
+
+@keyframes float {
+    0% {transform: translateY(0px)}
+    50% {transform: translateY(-30px)}
+    100% {transform: translateY(0px)}
+}
