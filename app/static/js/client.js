@@ -1,6 +1,6 @@
-var sendUpdate = (myPositionX, myPositionY, mySize) => {
+var sendUpdate = (args) => {
     console.log("send")
-    socket.emit("updateFromClient", [myUsername, myPositionX, myPositionY, mySize])
+    socket.emit("updateFromClient", args)
   }
   socket.on("updateFromServer", (players, agar) => {
     drawGame(players, agar)
@@ -132,33 +132,34 @@ var move = (key) => {
     if(!ran) { // this will make it not run multiple times
       if(actualKey == 37) {
         console.log("left")
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < args.length; i++) {
+          console.log(args[i][0])
           args[i][0] -= 1
         }
       } else if(actualKey == 39) {
         console.log("right")
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < args.length; i++) {
           args[i][0] += 1
         }
       } else if(actualKey == 38) {
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < args.length; i++) {
           args[i][1] -= 1
         }
       } else if(actualKey == 40) {
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < args.length; i++) {
           args[i][1] += 1
         }
       }
       console.log(args)
       // update the position
-      sendUpdate(args[0], args[1], args[2])
+      sendUpdate(args)
       ran = true
     }
  })
 }
 
 var split = () => {
-  socket.emit("getData")
+  socket.emit("getData", myUsername)
   socket.on("giveBackdata", (args) => {
     //console.log(args[myUsername][0])
     console.log("yes")

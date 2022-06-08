@@ -41,7 +41,7 @@ var drawPlayer = (x, y, radius, label, player = [null, null]) => {
 var drawOpponents = (user, players, offset_x, offset_y) => {
   for (p in players) {
     if (p != user) {
-      drawAgar(players[p][0] - offset_x, players[p][1] - offset_y, players[p][2]);
+      drawAgar(players[p][0][0] - offset_x, players[p][0][1] - offset_y, players[p][0][2]);
     }
   }
 }
@@ -60,7 +60,7 @@ var drawGame = (players, agar) => {
   // Clear screen
   ctx.clearRect(0, 0, c.clientWidth, c.clientHeight);
   
-  let player = players[user];
+  let player = players[user][0];
   let viewport_player = [center_x, center_y];
   
   if (player == null || player == 0) {
@@ -94,8 +94,8 @@ var drawGame = (players, agar) => {
   agar_offset[0] = clamp(agar_offset[0], 0, mapWidth - (c.clientWidth / 2))
   agar_offset[1] = clamp(agar_offset[1], 0, mapHeight - (c.clientHeight / 2))
 
-  console.log("VIEWPORT: " + viewport_player[0] + ", " + viewport_player[1])
-  console.log("OFFSET: " + agar_offset[0] + ", " + agar_offset[1])
+  //console.log("VIEWPORT: " + viewport_player[0] + ", " + viewport_player[1])
+  //console.log("OFFSET: " + agar_offset[0] + ", " + agar_offset[1])
 
   drawPlayer(viewport_player[0], viewport_player[1], player[2], myUsername, player);
   
