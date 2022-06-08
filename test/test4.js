@@ -4,7 +4,7 @@ var users = { // user: [xcor, ycor, area]
     [100, 100, 30]
   ],
   "Y": [
-    [100, 100, 10],
+    [100, 100, 40],
   ],
   "A": [
     [250, 250, 8]
@@ -21,11 +21,11 @@ var agar = [ // [xcor, ycor]
   [2, 4, 1]
 ];
 
-var viruses = { // user: [xcor, ycor, area]
-  "X": [225, 225, 10],
-  "Y": [225, 225, 15],
-  "Z": [375, 275, 20]
-};
+var viruses = [ // user: [xcor, ycor, area]
+  [225, 225, 10],
+  [225, 225, 15],
+  [375, 275, 20]
+];
 
 // allows all changes that need to be made to data to occur
 // call at the end of each move
@@ -54,6 +54,7 @@ function update(user) {
             users[user][l][2] += .9 * users[k][m][2];
             // delete object.keyname;
             delete users[k][m];
+            users[k] = users[k].filter(Boolean);
             console.log("Users: " + JSON.stringify(users));
           }
           // determines if one cell of other user is eating one of user
@@ -70,6 +71,7 @@ function update(user) {
             // delete object.keyname; or
             // delete object["keyname"];
             delete users[user][l];
+            users[user] = users[user].filter(Boolean);
             console.log("Users: " + JSON.stringify(users));
             // if users[user][l] deleted stops iterating through different
             // users[k][m] to look for interactions with that users[user][l]

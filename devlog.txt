@@ -47,3 +47,4 @@ danielS -- 2022-06-07 15:48 -- add top / left camera bounds (camera locks when p
 danielS -- 2022-06-07 22:39 -- update routing. modularize flask app
 danielS -- 2022-06-07 23:00 -- add login / register templates & styling
 joshuaK -- 2022-06-08 8:43 -- editing datastructure for users
+juliaN -- 2022-06-08 8:40 -- empty cells removed from data structure after eat in test4.js

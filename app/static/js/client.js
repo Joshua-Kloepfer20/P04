@@ -107,7 +107,7 @@ document.onkeyup = function(){arrowChange(false, "User")};
         case 32:
           if (isStart) {
             pressed = true
-            
+
           }
           else if (pressed == true) {
             split()
@@ -116,6 +116,12 @@ document.onkeyup = function(){arrowChange(false, "User")};
           break;
      }
    }
+
+// NOTES: instead of +- 1 establish a speed based on agar size
+// change from args[i][0] to args[i][1] to args[i][c][1] ?? as in new data
+// structure
+// what is the i that is being looped through? is that each smaller cell?
+// if so should be changed from i<5 to right amt
 
 var move = (key) => {
   socket.emit("getData", myUsername)
@@ -182,7 +188,7 @@ var shoot = (args, smallest) => {
     timerM = clearInterval(timerM)
   }
   else {
-    
+
   }
 }
 
