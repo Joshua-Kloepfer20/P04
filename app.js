@@ -37,17 +37,16 @@ io.on("connection", (socket) => {
       io.emit("updateFromServer", data, agarPos)
     }
     console.log("got it")
-    user = null
     userdata = []
-    for(var i = 0; i < args.length; i++) {
-      if(i == 0){
-        user = args[i]
-      } else{
-        userdata.push(args[i])
-      }
+    user = args[0]
+    console.log(user)
+    if (data[user] == null) {
+      data[user] = []
     }
-    data[user] = userdata
-    console.log(data)
+    for(var i = 0; i < args.length; i++) {
+      data[user][i] = args[i]
+    }
+    console.log(data[user])
     io.emit("updateFromServer", data, agarPos)
   });
 });
