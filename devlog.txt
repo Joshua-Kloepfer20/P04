@@ -44,3 +44,4 @@ juliaN -- 2022-06-07 8:38 -- work on rectifying eating
 juliaN -- 2022-06-07 9:04 -- users eating each other updated to facilitate users having multiple cells (test4.js)
 juliaN -- 2022-06-07 9:25 -- eating working for agar and users
 danielS -- 2022-06-07 15:48 -- add top / left camera bounds (camera locks when player approaches the end of the map)
+danielS -- 2022-06-07 22:39 -- update routing. modularize flask app
