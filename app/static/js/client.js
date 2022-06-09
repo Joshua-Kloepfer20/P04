@@ -9,9 +9,10 @@ var sendUpdate2 = (args) => {
     console.log("send")
     socket.emit("updateFromClient2", args)
   }
-  socket.on("updateFromServer", (players, agar) => {
-    drawGame(players, agar)
-  });
+  var sendUpdate3 = (users, agar) => {
+    console.log("usr", users)
+    socket.emit("updateFromClient2.5", users, agar)
+  }
 var mouseX = 0;
 var mouseY = 0;
 // Getting key presses
@@ -157,10 +158,10 @@ var move = (key) => {
           args[i][1] += 1
         }
       }
-      console.log(args)
+      console.log(args[0])
       // update the position
       args.unshift(myUsername)
-      sendUpdate2(args)
+      update(myUsername, args)
       ran = true
     }
  })
@@ -170,7 +171,7 @@ var split = () => {
   socket.emit("getData", myUsername)
   socket.on("giveBackdata", (args) => {
     //console.log(args[myUsername][0])
-    console.log("yes")
+    // console.log("yes")
     timerM = clearInterval(timerM)
     curtime = Date.now()
     theta = Math.atan((mouseY - center_y) / (mouseX - center_x)) * 180 / Math.PI
@@ -207,3 +208,178 @@ addEventListener("mousemove", function(e) {
   //mouseX = e.mouseX;
   //mouseY = e.mouseY;
 })
+// allows all changes that need to be made to data to occur
+// call at the end of each move
+function update(user, args) {
+  socket.emit("updateFromClient2", null);
+  var data = {}
+  var data2 = []
+  socket.on("updateFromServer", (users, agar) => {
+    console.log("Users: " + JSON.stringify(users));
+    if(users.length >= 2) {
+      for (let k in users) {
+        // console.log("On user " + k);
+        if (k != user) {
+          for (let l in users[user]) {
+           // console.log(users[user][l]);
+            for (let m in users[k]) {
+             // console.log(m);
+              // console.log(users[k][m]);
+              if (
+                // determines if one cell of user is eating one of other user
+                isEating(
+                  // users[user][l] <- example syntax to retrieve value
+                  users[user][l][0], users[user][l][1], users[user][l][2],
+                  users[k][m][0], users[k][m][1], users[k][m][2]
+                )
+              ) // updates if so
+              {
+                // console.log(user + "[" + l + "]" + " eating " + m + "[" + l + "]");
+                users[user][l][2] += .9 * users[k][m][2];
+                // deletes eaten cell
+                delete users[k][m];
+                // if cell attributes are empty, deletes cell
+                users[k] = users[k].filter(Boolean);
+               //  console.log("Users: " + JSON.stringify(users));
+              }
+              // determines if one cell of other user is eating one of user
+              else if (
+                isEating(
+                  // users[user][0] <- example syntax to retrieve value
+                  users[k][m][0], users[k][m][1], users[k][m][2],
+                  users[user][l][0], users[user][l][1], users[user][l][2]
+                )
+              ) // updates if so
+              {
+                // console.log(k + "[" + m + "]" + " eating " + user + "[" + l + "]");
+                users[k][m][2] += .9 * users[user][l][2];
+                // deletes eaten cell
+                delete users[user][l];
+                // if cell attributes are empty, deletes cell
+                users[user] = users[user].filter(Boolean);
+                // console.log("Users: " + JSON.stringify(users));
+                // if users[user][l] deleted stops iterating through different
+                // users[k][m] to look for interactions with that users[user][l]
+                // since it is null (not required)
+                break;
+              }
+            }
+          }
+          // Deletes users with no cells on map from dictionary
+          if (users[user].length == 0) {
+            delete users[user];
+          }
+          if (users[k].length == 0) {
+            delete users[k];
+          }
+        }
+      }
+    
+    }
+    
+    // determines eating with agar
+    for (let i in users[user]) {
+      for (let k in agar) {
+        // determines if any agar close enough to eat
+        if (
+          isEatingAgar(
+            users[user][i][0], users[user][i][1], users[user][i][2],
+            agar[k][0], agar[k][1], agar[k][2]
+          )
+        )
+        // updates if so
+        {
+          users[user][i][2] += agar[k][2];
+          delete agar[k];
+        }
+      }
+    }
+    Object.assign(data, users);
+    Object.assign(data2, agar);
+  });
+  console.log("data", data)
+  console.log("data2", data2)
+  sendUpdate2(args);
+  sendUpdate3(data, data2);
+};
+
+// gets radius associated with the cell's mass
+function getRadius(area) {
+  return Math.sqrt(
+    area / Math.PI
+  );
+};
+
+// gets the radius assosciated with 90% of the blob's mass
+function getInnerRadius(area) {
+  return Math.sqrt(
+    .9 * area / Math.PI
+  );
+}
+
+// gets distance between centers of two cells
+function getCenterDistance(xcorA, ycorA, xcorB, ycorB) {
+  return Math.sqrt(
+    Math.pow((xcorA - xcorB), 2)
+    +
+    Math.pow((ycorA - ycorB), 2)
+  );
+}
+
+// checks if close enough for interaction
+function isInteracting(xcorA, ycorA, areaA, xcorB, ycorB, areaB) {
+  var distance = getCenterDistance(xcorA, ycorA, xcorB, ycorB);
+  // console.log("Distance: " + distance)
+  // gives distance close enough for interaction (wrong rn)
+  var close = getInnerRadius(areaA) + getInnerRadius(areaB);
+  // console.log("Inner Radius A: " + getInnerRadius(areaA));
+  // console.log("Inner Radius B: " + getInnerRadius(areaB));
+  // console.log("Close: " + close);
+  if (distance <= close) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+// checks if user A is eating
+function isEating(xcorA, ycorA, areaA, xcorB, ycorB, areaB) {
+  // eats if ineracting and
+  // console.log("Interacting? " + isInteracting(xcorA, ycorA, areaA, xcorB, ycorB, areaB));
+  if (isInteracting(xcorA, ycorA, areaA, xcorB, ycorB, areaB)) {
+    // 90% userA mass is greater than or equal to userB mass
+    if (.9 * areaA >= areaB) {
+      return true;
+    }
+  }
+  // returns false otherwise
+  return false;
+}
+
+// // checks if user A is eaten (B is eating)
+// // only called when B is a user
+// function isEaten(xcorA, ycorA, areaA, xcorB, ycorB, areaB) {
+//   if (isEatingUser(xcorB, ycorB, areaB, xcorA, ycorA, areaA)) {
+//     return true;
+//   }
+//   return false;
+// }
+
+// checks if user A is eating agar
+// as long as two cells are close enough to touch, eating will occur
+function isEatingAgar(xcorA, ycorA, areaA, xcorB, ycorB, areaB) {
+  var distance = getCenterDistance(xcorA, ycorA, xcorB, ycorB);
+  // console.log("Distance: " + distance)
+  // gives distance close enough for interaction (wrong rn)
+  var close = getRadius(areaA) + getRadius(areaB);
+  // console.log("Radius A: " + getRadius(areaA));
+  // console.log("Radius B: " + getRadius(areaB));
+  // console.log("Close: " + close);
+  if (distance <= close) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}

@@ -13,10 +13,10 @@ const mapWidth = 10000;
 const mapHeight = 10000;
 // test data - will change later
 var data = {} // user: [xcor, ycor, area]
-var agarPos = [] // store positions of agar
+var agarPos = [[260, 250, 5]] // store positions of agar
 
 var spawnAgar = () => {
-  agarPos.push([parseInt(Math.random() * mapWidth), parseInt(Math.random() * mapHeight)])
+  agarPos.push([parseInt(Math.random() * mapWidth), parseInt(Math.random() * mapHeight), 5])
   io.emit("updateFromServer", data, agarPos)
 } 
 
@@ -25,6 +25,7 @@ io.on("connection", (socket) => {
   // socket.emit("updateFromServer") // only send to the client who connected
 
   socket.on("getData", (arg) => {
+    console.log(data)
     socket.emit("giveBackData", data[arg])
   })
 
@@ -35,36 +36,46 @@ io.on("connection", (socket) => {
   socket.on("updateFromClient", (args) => { // listen from a specific socket
     if(args == null) { // get data without sending data
       io.emit("updateFromServer", data, agarPos)
+    } else {
+      console.log("got it")
+      userdata = []
+      console.log(args)
+      user = args[0]
+      console.log(user)
+      if (data[user] == null) {
+        data[user] = []
+      }
+      for(var i = 1; i < args.length; i++) {
+        userdata[i - 1] = args[i]
+      }
+      data[user][0] = userdata
+      console.log(data)
+      io.emit("updateFromServer", data, agarPos)
     }
-    console.log("got it")
-    userdata = []
-    user = args[0]
-    console.log(user)
-    if (data[user] == null) {
-      data[user] = []
-    }
-    for(var i = 1; i < args.length; i++) {
-      userdata[i - 1] = args[i]
-    }
-    data[user][0] = userdata
-    console.log(data)
-    io.emit("updateFromServer", data, agarPos)
   });
   socket.on("updateFromClient2", (args) => { // listen from a specific socket
     if(args == null) { // get data without sending data
       io.emit("updateFromServer", data, agarPos)
+    } else {
+      console.log("got it")
+      userdata = []
+      user = args[0]
+      console.log(user)
+      if (data[user] == null) {
+        data[user] = []
+      }
+      for(var i = 1; i < args.length; i++) {
+        data[user][i - 1] = args[i]
+      }
+      console.log(data)
+      io.emit("updateFromServer", data, agarPos)
     }
-    console.log("got it")
-    userdata = []
-    user = args[0]
-    console.log(user)
-    if (data[user] == null) {
-      data[user] = []
-    }
-    for(var i = 1; i < args.length; i++) {
-      data[user][i - 1] = args[i]
-    }
-    console.log(data)
+    
+  });
+  socket.on("updateFromClient2.5", (users, agar) => { // listen from a specific socket
+    console.log("users", users)
+    data = users;
+    agarPos = agar;
     io.emit("updateFromServer", data, agarPos)
   });
 });

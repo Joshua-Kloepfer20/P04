@@ -42,7 +42,7 @@ var drawPlayer = (x, y, radius, label, player = [null, null]) => {
 var drawOpponents = (user, players, offset_x, offset_y) => {
   for (p in players) {
     if (p != user) {
-      drawAgar(players[p][0][0] - offset_x, players[p][0][1] - offset_y, players[p][0][2]);
+      drawAgar(players[p][0] - offset_x, players[p][1] - offset_y, players[p][2]);
     }
   }
 }
@@ -61,11 +61,11 @@ var drawGame = (players, agar) => {
   // Clear screen
   ctx.clearRect(0, 0, c.clientWidth, c.clientHeight);
   
-  let player = players[user][0];
+  let player = players[myUsername][0];
   let viewport_player = [center_x, center_y];
   
   if (player == null || player == 0) {
-    console.log("No player found");
+    // console.log("No player found");
     return null;
   }
 
