@@ -1,4 +1,5 @@
 @use 'style' as *;
+@use 'sass:color';
 
 body {
     position: absolute;
@@ -10,4 +11,12 @@ body {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 0;
+}
+
+.nav-container {
+    position: absolute;
+    top: calc(10px + 2vh);
+    right: calc(10px + 2vh);
+    z-index: 3;
 }

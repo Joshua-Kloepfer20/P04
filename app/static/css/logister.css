@@ -10,60 +10,6 @@ html, body {
   font-family: "Arial", sans-serif;
 }
 
-#logister-container {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-content: center;
-  padding: 0px calc(50px + 8vw);
-}
-
-.error {
-  color: #e90000;
-}
-
-.form-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.credential-container {
-  display: grid;
-  width: calc(300px + 5vw);
-  align-items: center;
-  grid-template-areas: "icon input";
-  grid-template-columns: auto 1fr;
-  gap: 16px;
-}
-.credential-container .credential-icon {
-  grid-area: icon;
-  height: 22px;
-  transition: fill 0.1s ease, transform 0.1s cubic-bezier(0.59, 1.47, 0.88, 1.37);
-}
-.credential-container .credential-input {
-  grid-area: input;
-  padding: 10px;
-  font-weight: 400;
-  border: none;
-  border-bottom: 2px solid #000000;
-  transition: border-color 0.1s ease;
-}
-.credential-container .credential-input:focus-visible {
-  outline: none;
-  border-color: #2645dd;
-}
-.credential-container .credential-input:focus-visible ~ .credential-icon {
-  fill: #2645dd;
-  transform: translateX(-5px);
-}
-
-h1 {
-  font-size: 6rem;
-  margin: 0 0 3rem;
-}
-
 .btn-container {
   display: flex;
   flex-flow: row wrap;
@@ -190,6 +136,60 @@ h1 {
 .btn-container .btn-outline-black:hover {
   border-color: #333333;
   color: #333333;
+}
+
+#logister-container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-content: center;
+  padding: 0px calc(50px + 8vw);
+}
+
+.error {
+  color: #e90000;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.credential-container {
+  display: grid;
+  width: calc(300px + 5vw);
+  align-items: center;
+  grid-template-areas: "icon input";
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+}
+.credential-container .credential-icon {
+  grid-area: icon;
+  height: 22px;
+  transition: fill 0.1s ease, transform 0.1s cubic-bezier(0.59, 1.47, 0.88, 1.37);
+}
+.credential-container .credential-input {
+  grid-area: input;
+  padding: 10px;
+  font-weight: 400;
+  border: none;
+  border-bottom: 2px solid #000000;
+  transition: border-color 0.1s ease;
+}
+.credential-container .credential-input:focus-visible {
+  outline: none;
+  border-color: #2645dd;
+}
+.credential-container .credential-input:focus-visible ~ .credential-icon {
+  fill: #2645dd;
+  transform: translateX(-5px);
+}
+
+h1 {
+  font-size: 6rem;
+  margin: 0 0 3rem;
 }
 
 .design-panel {

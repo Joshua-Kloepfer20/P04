@@ -10,20 +10,6 @@ html, body {
   font-family: "Arial", sans-serif;
 }
 
-#landing-container {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-content: center;
-  padding: 0px calc(50px + 8vw);
-}
-
-h1 {
-  font-size: 6rem;
-  margin: 0 0 3rem;
-}
-
 .btn-container {
   display: flex;
   flex-flow: row wrap;
@@ -134,6 +120,37 @@ h1 {
   border-color: #c3c3c3;
   color: #c3c3c3;
 }
+.btn-container .btn-fill-black {
+  background-color: #000000;
+  border-color: #000000;
+  color: #FFFFFF;
+}
+.btn-container .btn-fill-black:hover {
+  background-color: #333333;
+  border-color: #333333;
+}
+.btn-container .btn-outline-black {
+  border: 3px solid #000000;
+  color: #000000;
+}
+.btn-container .btn-outline-black:hover {
+  border-color: #333333;
+  color: #333333;
+}
+
+#landing-container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-content: center;
+  padding: 0px calc(50px + 8vw);
+}
+
+h1 {
+  font-size: 6rem;
+  margin: 0 0 3rem;
+}
 
 .design-panel {
   display: flex;
@@ -161,6 +178,10 @@ h1 {
 .design-panel .circle-gray {
   border-radius: 50%;
   background-color: #b4b4b4;
+}
+.design-panel .circle-black {
+  border-radius: 50%;
+  background-color: #000000;
 }
 .design-panel .big {
   width: 200px;

@@ -26,7 +26,7 @@ def game():
     if (not auth.logged_in()):
         return redirect("/")
     auth.make_users
-    return render_template('index.html', user=session["username"])
+    return render_template('game.html', user=session["username"])
 
 if __name__ == "__main__":
     app.debug = True

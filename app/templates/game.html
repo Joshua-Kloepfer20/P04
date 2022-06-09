@@ -6,12 +6,14 @@
 {% endblock %}
 
 {% block content %}
+    <div class="nav-container">
+        <div class="btn-container">
+            <div class="btn btn-fill-blue" onclick="window.location='/logout'" >LOGOUT</div>
+        </div>
+    </div>
     <canvas width="500" height="500" id="game"></canvas>
-    <p>Hi, {{user}}!</p>
-    <a href="login">login</a>
-    <a href="logout">logout</a>
     <script>
-        var user = "{{user}}"
+        var user = "{{ user }}"
     </script>
     <!-- Utility scripts -->
     <script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>

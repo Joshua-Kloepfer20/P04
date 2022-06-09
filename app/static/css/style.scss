@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 $arial: 'Arial', sans-serif;
 
 $white: #FFFFFF;
@@ -46,4 +48,57 @@ html, body {
     margin: 0;
     
     font-family: $arial;
+}
+
+.btn-container {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 15px;
+
+    .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        padding: 20px 20px;
+        width: 150px;
+        border-radius: 5px;
+
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 600;
+        cursor: pointer;
+
+        @include transition(
+            letter-spacing cubic-bezier(.17,.67,.72,1.6) .15s,
+            background-color ease-out .10s,
+            border-color ease-out .10s
+        );
+
+        &:hover {
+            letter-spacing: 3px;
+        }
+    }
+    
+    @each $name, $col in $color-list {
+        .btn-fill-#{$name} {
+            @include bg_border($col);
+            color: $white;
+
+            &:hover {
+                @include bg_border(color.scale($col, $lightness: 20%));
+            }
+        }
+
+        .btn-outline-#{$name} {
+            border: 3px solid $col;
+            color: $col;
+
+            &:hover {
+                border-color: color.scale($col, $lightness: 20%);
+                color: color.scale($col, $lightness: 20%);
+            }
+        }
+    }
+
 }
