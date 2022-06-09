@@ -43,13 +43,32 @@ io.on("connection", (socket) => {
     if (data[user] == null) {
       data[user] = []
     }
-    for(var i = 0; i < args.length; i++) {
-      data[user][i] = args[i]
+    for(var i = 1; i < args.length; i++) {
+      userdata[i - 1] = args[i]
     }
-    console.log(data[user])
+    data[user][0] = userdata
+    console.log(data)
+    io.emit("updateFromServer", data, agarPos)
+  });
+  socket.on("updateFromClient2", (args) => { // listen from a specific socket
+    if(args == null) { // get data without sending data
+      io.emit("updateFromServer", data, agarPos)
+    }
+    console.log("got it")
+    userdata = []
+    user = args[0]
+    console.log(user)
+    if (data[user] == null) {
+      data[user] = []
+    }
+    for(var i = 1; i < args.length; i++) {
+      data[user][i - 1] = args[i]
+    }
+    console.log(data)
     io.emit("updateFromServer", data, agarPos)
   });
 });
+
 
 
 setInterval(spawnAgar, 1000) // create new agar every second

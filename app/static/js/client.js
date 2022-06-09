@@ -5,6 +5,13 @@ var sendUpdate = (args) => {
   socket.on("updateFromServer", (players, agar) => {
     drawGame(players, agar)
   });
+var sendUpdate2 = (args) => {
+    console.log("send")
+    socket.emit("updateFromClient2", args)
+  }
+  socket.on("updateFromServer", (players, agar) => {
+    drawGame(players, agar)
+  });
 var mouseX = 0;
 var mouseY = 0;
 // Getting key presses
@@ -152,7 +159,8 @@ var move = (key) => {
       }
       console.log(args)
       // update the position
-      sendUpdate(args)
+      args.unshift(myUsername)
+      sendUpdate2(args)
       ran = true
     }
  })

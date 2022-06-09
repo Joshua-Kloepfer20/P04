@@ -32,6 +32,7 @@ var drawText = (x, y, text, fill = "black", stroke = "black") => {
 
 var drawPlayer = (x, y, radius, label, player = [null, null]) => {
   drawAgar(x, y, radius, "green");
+  console.log(label)
   drawText(x, y, label);
   if (DEBUG) {
     drawText(x, y + 20, player[0] + ", " + player[1])
@@ -96,7 +97,7 @@ var drawGame = (players, agar) => {
 
   //console.log("VIEWPORT: " + viewport_player[0] + ", " + viewport_player[1])
   //console.log("OFFSET: " + agar_offset[0] + ", " + agar_offset[1])
-
+  
   drawPlayer(viewport_player[0], viewport_player[1], player[2], myUsername, player);
   
   drawAgarPellets(agar_offset[0], agar_offset[1], agar)
