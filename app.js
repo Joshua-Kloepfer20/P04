@@ -13,10 +13,11 @@ const mapWidth = 10000;
 const mapHeight = 10000;
 // test data - will change later
 var data = {} // user: [xcor, ycor, area]
-var agarPos = [[260, 250, 5]] // store positions of agar
+var agarPos = [] // store positions of agar
 
 var spawnAgar = () => {
   agarPos.push([parseInt(Math.random() * mapWidth), parseInt(Math.random() * mapHeight), 5])
+  console.log(agarPos)
   io.emit("updateFromServer", data, agarPos)
 } 
 
