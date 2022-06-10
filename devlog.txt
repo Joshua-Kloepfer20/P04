@@ -7,7 +7,6 @@ juliaN -- 2022-05-26 21:39 -- more game mechanics and target ship date added to 
 juliaN -- 2022-05-27 8:09 -- second database added to DD to keep track of map
 danielS -- 2022-05-27 8:20 -- add socket.io requirement
 juliaN -- 2022-05-27 8:36 -- sqlite3 database created with node.js
-danielS -- 2022-05-25 8:37 -- add basic file structure. Add basic stylings.
 michaelB -- 2022-05-29 18:54 -- begin implementing client-server data sending
 michaelB -- 2022-05-30 16:15 -- remove client-side attributes
 juliaN -- 2022-05-31 8:37 -- arrow key interactivity added
@@ -57,3 +56,4 @@ michaelB -- 2022-06-09 21:39 -- add bounds to map
 michaelB -- 2022-06-09 22:03 -- randomize user position on join
 juliaN -- 2022-06-09 22:38 -- README.md updated and DD changes
 michaelB -- 2022-06-10 01:06 -- minor fixes to speed
+juliaN -- 2022-06-10 6:28 -- DD updated and added to repo
