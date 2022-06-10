@@ -148,23 +148,23 @@ var move = (key) => {
         for (let i = 0; i < args.length; i++) {
           console.log(args[i][0]);
           console.log(args[i][2]);
-          args[i][0] -= 25 / args[i][2;
+          args[i][0] -= 25 / args[i][2];
         }
       } else if(actualKey == 39) {
         console.log("right");
         for (let i = 0; i < args.length; i++) {
           console.log(args[i][2]);
-          args[i][0] += 25 / args[i][2;
+          args[i][0] += 25 / args[i][2];
         }
       } else if(actualKey == 38) {
         for (let i = 0; i < args.length; i++) {
           console.log(args[i][2]);
-          args[i][1] -= 25 / args[i][2;
+          args[i][1] -= 25 / args[i][2];
         }
       } else if(actualKey == 40) {
         for (let i = 0; i < args.length; i++) {
           console.log(args[i][2]);
-          args[i][1] += 25 / args[i][2;
+          args[i][1] += 25 / args[i][2];
         }
       }
       console.log(args[0])
