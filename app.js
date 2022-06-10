@@ -72,13 +72,19 @@ io.on("connection", (socket) => {
     }
     
   });
-  socket.on("updateFromClient2.5", (users, agar) => { // listen from a specific socket
+  socket.on("updateFromClient2.5", (users, agar, i, size) => { // listen from a specific socket
     if (users == "users") {
+      console.log("removing user")
       delete data[agar]
     }
-    else {
+    else if (users == "agar") {
       console.log("removing agar at pos", agar)
       agarPos.splice(agar, 1)
+    }
+    else if (users == "size") {
+      console.log(size)
+      data[agar][i][2] = size
+      console.log(data)
     }
     io.emit("updateFromServer", data, agarPos)
   });

@@ -11,10 +11,13 @@ var sendUpdate2 = (args) => {
     socket.emit("updateFromClient2", args)
   }
 var sendUpdate3 = (k) => {
-    socket.emit("updateFromClient2.5", "agar", k)
+    socket.emit("updateFromClient2.5", "agar", k, null)
   }
 var sendUpdate4 = (k) => {
-  socket.emit("updateFromClient2.5", "users", k)
+  socket.emit("updateFromClient2.5", "users", k, null)
+}
+var sendupdate5 = (k, i, size) => {
+  socket.emit("updateFromClient2.5", "size", k, i, size)
 }
 var mouseX = 0;
 var mouseY = 0;
@@ -295,6 +298,7 @@ function update(users, agar) {
       // updates if so
       {
         users[user][i][2] += agar[k][2];
+        sendupdate5(user, i, users[user][i][2])
         sendUpdate3(k)
         break
       }
