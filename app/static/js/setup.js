@@ -9,4 +9,4 @@ var ctx = c.getContext("2d"); // Get canvas context
 const socket = io("ws://localhost:3000")
 const myUsername = user; // immutable
 console.log(user);
-socket.emit("updateFromClient", [myUsername, parseInt(Math.random() * mapWidth), parseInt(Math.random() * mapHeight), 10]); // init new user (change to random pos later)
+socket.emit("updateFromClient", [myUsername, 250, 250, 10]); // [myUsername, parseInt(Math.random() * mapWidth), parseInt(Math.random() * mapHeight), 10]); // init new user (change to random pos later)

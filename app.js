@@ -88,7 +88,7 @@ io.on("connection", (socket) => {
       console.log(data)
     }
     else if (users == "cell") {
-      data[agar].splice(i, 1)
+      // data[agar].splice(i, 1)
     }
     io.emit("updateFromServer", data, agarPos)
   });

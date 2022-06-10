@@ -241,15 +241,16 @@ function update(users, agar) {
   var data = {}
   var data2 = []
   console.log("Users: " + JSON.stringify(users));
-  if(users.length >= 2) {
+  // if(users.length >= 2) {
     for (let k in users) {
       // console.log("On user " + k);
       if (k != user) {
         for (let l in users[user]) {
-          // console.log(users[user][l]);
+         //  console.log(users[user][l]);
           for (let m in users[k]) {
             // console.log(m);
             // console.log(users[k][m]);
+            // console.log("running")
             if (
               // determines if one cell of user is eating one of other user
               isEating(
@@ -270,7 +271,7 @@ function update(users, agar) {
               //  console.log("Users: " + JSON.stringify(users));
             }
             // determines if one cell of other user is eating one of user
-            else if (
+            if (
               isEating(
                 // users[user][0] <- example syntax to retrieve value
                 users[k][m][0], users[k][m][1], users[k][m][2],
@@ -293,7 +294,7 @@ function update(users, agar) {
               break;
             }
           }
-        }
+       // }
         // Deletes users with no cells on map from dictionary
         if (users[user].length == 0) {
           sendUpdate4(user)
