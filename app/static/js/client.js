@@ -149,24 +149,37 @@ var move = (key) => {
           console.log(args[i][0]);
           console.log(args[i][2]);
           args[i][0] -= 25 / args[i][2];
+          if(args[i][0] < 0) {
+            args[i][0] = 0
+          }
         }
       } else if(actualKey == 39) {
         console.log("right");
         for (let i = 0; i < args.length; i++) {
           console.log(args[i][2]);
           args[i][0] += 25 / args[i][2];
+          if(args[i][0] > 10000) {
+            args[i][0] = 10000
+          }
         }
       } else if(actualKey == 38) {
         for (let i = 0; i < args.length; i++) {
           console.log(args[i][2]);
           args[i][1] -= 25 / args[i][2];
+          if(args[i][1] < 0) {
+            args[i][1] = 0
+          }
         }
       } else if(actualKey == 40) {
         for (let i = 0; i < args.length; i++) {
           console.log(args[i][2]);
           args[i][1] += 25 / args[i][2];
+          if(args[i][1] > 10000) {
+            args[i][1] = 10000
+          }
         }
       }
+      
       console.log(args[0])
       // update the position
       args.unshift(myUsername)
