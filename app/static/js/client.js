@@ -11,13 +11,16 @@ var sendUpdate2 = (args) => {
     socket.emit("updateFromClient2", args)
   }
 var sendUpdate3 = (k) => {
-    socket.emit("updateFromClient2.5", "agar", k, null)
+    socket.emit("updateFromClient2.5", "agar", k, null, null)
   }
 var sendUpdate4 = (k) => {
-  socket.emit("updateFromClient2.5", "users", k, null)
+  socket.emit("updateFromClient2.5", "users", k, null, null)
 }
 var sendupdate5 = (k, i, size) => {
   socket.emit("updateFromClient2.5", "size", k, i, size)
+}
+var sendUpdate6 = (k, i) => {
+  socket.emit("updateFromClient2.5", "cell", k, i, null)
 }
 var mouseX = 0;
 var mouseY = 0;
@@ -258,8 +261,10 @@ function update(users, agar) {
             {
               // console.log(user + "[" + l + "]" + " eating " + m + "[" + l + "]");
               users[user][l][2] += .9 * users[k][m][2];
+              sendupdate5(user, l, users[user][l][2])
               // deletes eaten cell
               delete users[k][m];
+              sendUpdate6(k, m)
               // if cell attributes are empty, deletes cell
               users[k] = users[k].filter(Boolean);
               //  console.log("Users: " + JSON.stringify(users));
@@ -275,8 +280,10 @@ function update(users, agar) {
             {
               // console.log(k + "[" + m + "]" + " eating " + user + "[" + l + "]");
               users[k][m][2] += .9 * users[user][l][2];
+              sendupdate5(k, m, users[k][m][2])
               // deletes eaten cell
               delete users[user][l];
+              sendUpdate6(user, l)
               // if cell attributes are empty, deletes cell
               users[user] = users[user].filter(Boolean);
               // console.log("Users: " + JSON.stringify(users));
