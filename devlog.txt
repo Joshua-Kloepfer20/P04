@@ -49,6 +49,7 @@ danielS -- 2022-06-07 23:00 -- add login / register templates & styling
 juliaN -- 2022-06-08 8:40 -- empty cells removed from data structure after eat in test4.js
 joshuaK -- 2022-06-08 8:43 -- editing data structure for users
 juliaN -- 2022-06-08 12:16 -- empty users removed from same data structure
-joshuaK -- 2022-06-09 4:05 -- finished editing
-joshuaK -- 2022-06-09 8:13 -- edited update code
-juliaN -- 2022-06-09 8:40 -- move speed changed to take into account cell size
+joshuaK -- 2022-06-09 16:05 -- finished editing
+joshuaK -- 2022-06-09 20:13 -- edited update code
+juliaN -- 2022-06-09 20:40 -- move speed changed to take into account cell size
+michaelB -- 2022-06-09 21:22 -- change color and add name to opponents

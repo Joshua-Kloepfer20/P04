@@ -1,7 +1,7 @@
 const mapWidth = 10000;
 const mapHeight = 10000;
 
-const DEBUG = true;
+const DEBUG = false;
 
 var c = document.getElementById("game"); // Get canvas
 var ctx = c.getContext("2d"); // Get canvas context
