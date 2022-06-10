@@ -73,9 +73,13 @@ io.on("connection", (socket) => {
     
   });
   socket.on("updateFromClient2.5", (users, agar) => { // listen from a specific socket
-    console.log("users", users)
-    data = users;
-    agarPos = agar;
+    if (users == "users") {
+      delete data[agar]
+    }
+    else {
+      console.log("removing agar at pos", agar)
+      agarPos.splice(agar, 1)
+    }
     io.emit("updateFromServer", data, agarPos)
   });
 });

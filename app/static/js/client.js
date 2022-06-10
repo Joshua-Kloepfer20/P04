@@ -3,16 +3,19 @@ var sendUpdate = (args) => {
     socket.emit("updateFromClient", args)
   }
   socket.on("updateFromServer", (players, agar) => {
-    drawGame(players, agar)
+      update(players, agar)
+      drawGame(players, agar)
   });
 var sendUpdate2 = (args) => {
     console.log("send")
     socket.emit("updateFromClient2", args)
   }
-  var sendUpdate3 = (users, agar) => {
-    console.log("usr", users)
-    socket.emit("updateFromClient2.5", users, agar)
+var sendUpdate3 = (k) => {
+    socket.emit("updateFromClient2.5", "agar", k)
   }
+var sendUpdate4 = (k) => {
+  socket.emit("updateFromClient2.5", "users", k)
+}
 var mouseX = 0;
 var mouseY = 0;
 // Getting key presses
@@ -161,7 +164,8 @@ var move = (key) => {
       console.log(args[0])
       // update the position
       args.unshift(myUsername)
-      update(myUsername, args)
+      sendUpdate2(args)
+      //update(myUsername, args)
       ran = true
     }
  })
@@ -210,97 +214,92 @@ addEventListener("mousemove", function(e) {
 })
 // allows all changes that need to be made to data to occur
 // call at the end of each move
-function update(user, args) {
-  socket.emit("updateFromClient2", null);
+function update(users, agar) {
+  user = myUsername
   var data = {}
   var data2 = []
-  socket.on("updateFromServer", (users, agar) => {
-    console.log("Users: " + JSON.stringify(users));
-    if(users.length >= 2) {
-      for (let k in users) {
-        // console.log("On user " + k);
-        if (k != user) {
-          for (let l in users[user]) {
-           // console.log(users[user][l]);
-            for (let m in users[k]) {
-             // console.log(m);
-              // console.log(users[k][m]);
-              if (
-                // determines if one cell of user is eating one of other user
-                isEating(
-                  // users[user][l] <- example syntax to retrieve value
-                  users[user][l][0], users[user][l][1], users[user][l][2],
-                  users[k][m][0], users[k][m][1], users[k][m][2]
-                )
-              ) // updates if so
-              {
-                // console.log(user + "[" + l + "]" + " eating " + m + "[" + l + "]");
-                users[user][l][2] += .9 * users[k][m][2];
-                // deletes eaten cell
-                delete users[k][m];
-                // if cell attributes are empty, deletes cell
-                users[k] = users[k].filter(Boolean);
-               //  console.log("Users: " + JSON.stringify(users));
-              }
-              // determines if one cell of other user is eating one of user
-              else if (
-                isEating(
-                  // users[user][0] <- example syntax to retrieve value
-                  users[k][m][0], users[k][m][1], users[k][m][2],
-                  users[user][l][0], users[user][l][1], users[user][l][2]
-                )
-              ) // updates if so
-              {
-                // console.log(k + "[" + m + "]" + " eating " + user + "[" + l + "]");
-                users[k][m][2] += .9 * users[user][l][2];
-                // deletes eaten cell
-                delete users[user][l];
-                // if cell attributes are empty, deletes cell
-                users[user] = users[user].filter(Boolean);
-                // console.log("Users: " + JSON.stringify(users));
-                // if users[user][l] deleted stops iterating through different
-                // users[k][m] to look for interactions with that users[user][l]
-                // since it is null (not required)
-                break;
-              }
+  console.log("Users: " + JSON.stringify(users));
+  if(users.length >= 2) {
+    for (let k in users) {
+      // console.log("On user " + k);
+      if (k != user) {
+        for (let l in users[user]) {
+          // console.log(users[user][l]);
+          for (let m in users[k]) {
+            // console.log(m);
+            // console.log(users[k][m]);
+            if (
+              // determines if one cell of user is eating one of other user
+              isEating(
+                // users[user][l] <- example syntax to retrieve value
+                users[user][l][0], users[user][l][1], users[user][l][2],
+                users[k][m][0], users[k][m][1], users[k][m][2]
+              )
+            ) // updates if so
+            {
+              // console.log(user + "[" + l + "]" + " eating " + m + "[" + l + "]");
+              users[user][l][2] += .9 * users[k][m][2];
+              // deletes eaten cell
+              delete users[k][m];
+              // if cell attributes are empty, deletes cell
+              users[k] = users[k].filter(Boolean);
+              //  console.log("Users: " + JSON.stringify(users));
+            }
+            // determines if one cell of other user is eating one of user
+            else if (
+              isEating(
+                // users[user][0] <- example syntax to retrieve value
+                users[k][m][0], users[k][m][1], users[k][m][2],
+                users[user][l][0], users[user][l][1], users[user][l][2]
+              )
+            ) // updates if so
+            {
+              // console.log(k + "[" + m + "]" + " eating " + user + "[" + l + "]");
+              users[k][m][2] += .9 * users[user][l][2];
+              // deletes eaten cell
+              delete users[user][l];
+              // if cell attributes are empty, deletes cell
+              users[user] = users[user].filter(Boolean);
+              // console.log("Users: " + JSON.stringify(users));
+              // if users[user][l] deleted stops iterating through different
+              // users[k][m] to look for interactions with that users[user][l]
+              // since it is null (not required)
+              break;
             }
           }
-          // Deletes users with no cells on map from dictionary
-          if (users[user].length == 0) {
-            delete users[user];
-          }
-          if (users[k].length == 0) {
-            delete users[k];
-          }
+        }
+        // Deletes users with no cells on map from dictionary
+        if (users[user].length == 0) {
+          sendUpdate4(user)
+          break
+        }
+        if (users[k].length == 0) {
+          sendUpdate4(k)
+          break
         }
       }
-    
     }
-    
-    // determines eating with agar
-    for (let i in users[user]) {
-      for (let k in agar) {
-        // determines if any agar close enough to eat
-        if (
-          isEatingAgar(
-            users[user][i][0], users[user][i][1], users[user][i][2],
-            agar[k][0], agar[k][1], agar[k][2]
-          )
+  
+  }
+  
+  // determines eating with agar
+  for (let i in users[user]) {
+    for (let k in agar) {
+      // determines if any agar close enough to eat
+      if (
+        isEatingAgar(
+          users[user][i][0], users[user][i][1], users[user][i][2],
+          agar[k][0], agar[k][1], agar[k][2]
         )
-        // updates if so
-        {
-          users[user][i][2] += agar[k][2];
-          delete agar[k];
-        }
+      )
+      // updates if so
+      {
+        users[user][i][2] += agar[k][2];
+        sendUpdate3(k)
+        break
       }
     }
-    Object.assign(data, users);
-    Object.assign(data2, agar);
-  });
-  console.log("data", data)
-  console.log("data2", data2)
-  sendUpdate2(args);
-  sendUpdate3(data, data2);
+  }
 };
 
 // gets radius associated with the cell's mass
