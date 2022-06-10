@@ -5,11 +5,6 @@ const font_face = "Comic Sans"
 var center_x = Math.floor(c.clientWidth / 2);
 var center_y = Math.floor(c.clientHeight / 2);
 
-// Get the radius squared of the circumscribed circle of the screen
-var screen_circle_radius = Math.floor(
-  (c.clientHeight / 2) * (c.clientHeight / 2) + (c.clientWidth / 2) * (c.clientWidth / 2)
-)
-
 var agar_offset = [0, 0]
 
 var resizeCanvas = () => {
@@ -85,8 +80,10 @@ var drawGame = (players, agar) => {
 
     debug("At left corner. Distance to left wall (player_xcor): " + player[0])
 
-  } else if (false) {
+  } else if (player[0] >= (mapWidth - (c.clientWidth / 2))) {
     // Player is at right bound of map
+    viewport_player[0] = c.clientWidth - (mapWidth - player[0])
+    debug("At right bound. Distance from right wall: " + viewport_player[0])
   } else {
     // Offset if player is not at map bounds
     agar_offset[0] = player[0] - (c.clientWidth / 2);
@@ -95,8 +92,10 @@ var drawGame = (players, agar) => {
   if (player[1] <= (c.clientHeight / 2)) {
     // Player is at top bound of map
     viewport_player[1] = player[1];
-  } else if (false) {
+  } else if (player[1] >= (mapHeight - (c.clientHeight / 2))) {
     // Player is at bottom bound of map
+    viewport_player[1] = c.clientHeight - (mapHeight - player[1])
+    debug("At right bound. Distance from right wall: " + viewport_player[1])
   } else {
     // Offset if player is not at map bounds
     agar_offset[1] = player[1] - (c.clientHeight / 2);
