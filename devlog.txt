@@ -54,3 +54,4 @@ joshuaK -- 2022-06-09 20:13 -- edited update code
 juliaN -- 2022-06-09 20:40 -- move speed changed to take into account cell size
 michaelB -- 2022-06-09 21:22 -- change color and add name to opponents
 michaelB -- 2022-06-09 21:39 -- add bounds to map
+michaelB -- 2022-06-09 22:03 -- randomize user position on join

@@ -11,7 +11,7 @@ const io = new Server({
 });
 const mapWidth = 10000;
 const mapHeight = 10000;
-// test data - will change later
+
 var data = {} // user: [xcor, ycor, area]
 var agarPos = [] // store positions of agar
 
