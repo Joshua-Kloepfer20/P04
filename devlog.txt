@@ -51,3 +51,4 @@ joshuaK -- 2022-06-08 8:43 -- editing data structure for users
 juliaN -- 2022-06-08 12:16 -- empty users removed from same data structure
 joshuaK -- 2022-06-09 4:05 -- finished editing
 joshuaK -- 2022-06-09 8:13 -- edited update code
+juliaN -- 2022-06-09 8:40 -- move speed changed to take into account cell size

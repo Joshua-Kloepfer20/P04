@@ -29,8 +29,9 @@ document.onkeyup = function(){arrowChange(false, "User")};
 
   function arrowChange(isDown, user) {
   var key = event.keyCode;
-      // determines if an arrow key was pressed
+      // determines if an arrow key was pressed or space bar
       switch (key) {
+        // each case is the key code assosciated with an arrow press except 32
          case 37: case 38: case 39: case 40: case 32:
             // if a keydown event occured, starts movement by calling change
             // timer with isStart as true
@@ -131,12 +132,6 @@ document.onkeyup = function(){arrowChange(false, "User")};
      }
    }
 
-// NOTES: instead of +- 1 establish a speed based on agar size
-// change from args[i][0] to args[i][1] to args[i][c][1] ?? as in new data
-// structure
-// what is the i that is being looped through? is that each smaller cell?
-// if so should be changed from i<5 to right amt
-
 var move = (key) => {
   socket.emit("getData", myUsername)
   console.log("moved" + key)
@@ -144,24 +139,32 @@ var move = (key) => {
   ran = false
   socket.on("giveBackData", (args) => { // this runs multiple times for some reason
     if(!ran) { // this will make it not run multiple times
+      // args[i][0] will be x coordinates
+      // args[i][1] will be y
+      // args[i][2] will be area
+      // by adding +- 25 / args[i][2] move speed inversely proportional to area
       if(actualKey == 37) {
-        console.log("left")
+        console.log("left");
         for (let i = 0; i < args.length; i++) {
-          console.log(args[i][0])
-          args[i][0] -= 1
+          console.log(args[i][0]);
+          console.log(args[i][2]);
+          args[i][0] -= 25 / args[i][2;
         }
       } else if(actualKey == 39) {
-        console.log("right")
+        console.log("right");
         for (let i = 0; i < args.length; i++) {
-          args[i][0] += 1
+          console.log(args[i][2]);
+          args[i][0] += 25 / args[i][2;
         }
       } else if(actualKey == 38) {
         for (let i = 0; i < args.length; i++) {
-          args[i][1] -= 1
+          console.log(args[i][2]);
+          args[i][1] -= 25 / args[i][2;
         }
       } else if(actualKey == 40) {
         for (let i = 0; i < args.length; i++) {
-          args[i][1] += 1
+          console.log(args[i][2]);
+          args[i][1] += 25 / args[i][2;
         }
       }
       console.log(args[0])
@@ -282,9 +285,9 @@ function update(users, agar) {
         }
       }
     }
-  
+
   }
-  
+
   // determines eating with agar
   for (let i in users[user]) {
     for (let k in agar) {
