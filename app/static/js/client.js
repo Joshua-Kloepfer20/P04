@@ -151,7 +151,7 @@ var move = (key) => {
         for (let i = 0; i < args.length; i++) {
           console.log(args[i][0]);
           console.log(args[i][2]);
-          args[i][0] -= 25 / args[i][2];
+          args[i][0] -= 10 / args[i][2];
           if(args[i][0] < 0) {
             args[i][0] = 0
           }
@@ -160,7 +160,7 @@ var move = (key) => {
         console.log("right");
         for (let i = 0; i < args.length; i++) {
           console.log(args[i][2]);
-          args[i][0] += 25 / args[i][2];
+          args[i][0] += 10 / args[i][2];
           if(args[i][0] > 10000) {
             args[i][0] = 10000
           }
@@ -168,7 +168,7 @@ var move = (key) => {
       } else if(actualKey == 38) {
         for (let i = 0; i < args.length; i++) {
           console.log(args[i][2]);
-          args[i][1] -= 25 / args[i][2];
+          args[i][1] -= 10 / args[i][2];
           if(args[i][1] < 0) {
             args[i][1] = 0
           }
@@ -176,7 +176,7 @@ var move = (key) => {
       } else if(actualKey == 40) {
         for (let i = 0; i < args.length; i++) {
           console.log(args[i][2]);
-          args[i][1] += 25 / args[i][2];
+          args[i][1] += 10 / args[i][2];
           if(args[i][1] > 10000) {
             args[i][1] = 10000
           }
@@ -271,7 +271,7 @@ function update(users, agar) {
               //  console.log("Users: " + JSON.stringify(users));
             }
             // determines if one cell of other user is eating one of user
-            if (
+            else if (
               isEating(
                 // users[user][0] <- example syntax to retrieve value
                 users[k][m][0], users[k][m][1], users[k][m][2],
