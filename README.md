@@ -1,7 +1,7 @@
 # Untitled Circle Game by Marvelous Moles
 
 ## Description
-A game that mimics Agar.io, an endless game about growing bigger by eating other players.  Players will be able to play on a multiplayer server with other players and eat their friends. They will also be able to login to save their highscores to a global leaderboard.
+A game that mimics Agar.io, an endless game about growing bigger by eating other players.  Players will be able to play on a multiplayer server with other players and eat their friends.
 
 ## Roles
 * Lia - game mechanics (JS), backend
@@ -49,7 +49,7 @@ $ git clone git@github.com:Joshua-Kloepfer20/P04.git
 
 ```
 (<venv_name>)$ cd <path_to_P04>
-(<venv_name>)$ pip3 install -r requirements.txt 
+(<venv_name>)$ pip3 install -r requirements.txt
 ```
 
 #### Run Program
@@ -78,5 +78,4 @@ The Node.js server runs on http://127.0.0.1:3000/, but a user will never need to
 
 ## Launch Codes - Don't Run Locally
 
-Go to http://192.34.56.31/p4 or softdev.miczuk.com/p4. 
-
+Go to http://192.34.56.31/p4 or softdev.miczuk.com/p4.
