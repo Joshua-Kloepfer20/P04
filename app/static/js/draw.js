@@ -4,6 +4,12 @@ const font_face = "Comic Sans"
 
 var center_x = Math.floor(c.clientWidth / 2);
 var center_y = Math.floor(c.clientHeight / 2);
+
+// Get the radius squared of the circumscribed circle of the screen
+var screen_circle_radius = Math.floor(
+  (c.clientHeight / 2) * (c.clientHeight / 2) + (c.clientWidth / 2) * (c.clientWidth / 2)
+)
+
 var agar_offset = [0, 0]
 
 var resizeCanvas = () => {
@@ -11,6 +17,9 @@ var resizeCanvas = () => {
   c.height = document.body.clientHeight; 
   center_x = Math.floor(c.clientWidth / 2);
   center_y = Math.floor(c.clientHeight / 2);
+  screen_circle_radius = Math.floor(
+    (c.clientHeight / 2) * (c.clientHeight / 2) + (c.clientWidth / 2) * (c.clientWidth / 2)
+  )
 }
 
 var drawAgar = (x, y, radius, fill = "pink", stroke = "black") => {
@@ -61,13 +70,13 @@ var drawGame = (players, agar) => {
   // Clear screen
   ctx.clearRect(0, 0, c.clientWidth, c.clientHeight);
   
-  let player = players[myUsername][0];
-  let viewport_player = [center_x, center_y];
-  
-  if (player == null || player == 0) {
-    // console.log("No player found");
+  if (players == null || players.length == 0 || players[myUsername] == null) {
+    debug("No player found");
     return null;
   }
+
+  let player = players[myUsername][0]
+  let viewport_player = [center_x, center_y];
 
   if (player[0] <= (c.clientWidth / 2)) {
     // Player is at left bound of map
@@ -103,10 +112,6 @@ var drawGame = (players, agar) => {
   drawAgarPellets(agar_offset[0], agar_offset[1], agar)
 
   drawOpponents(user, players, agar_offset[0], agar_offset[1])
-
-
-  // Draw others
-    // draw viruses (TODO)
   }
 
 resizeCanvas();
